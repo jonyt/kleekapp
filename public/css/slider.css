@@ -1,0 +1,118 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+    /* image replacement */
+
+        .graphic, #prevBtn, #nextBtn{
+
+            margin:0;
+
+            padding:0;
+
+            display:block;
+
+            overflow:hidden;
+
+            text-indent:-8000px;
+
+            }
+
+    /* // image replacement */
+
+			
+
+			
+
+
+
+/* Easy Slider */
+
+
+
+	#slider{
+	margin-top:2px;	
+		
+		}	
+
+	#slider ul, #slider li{
+
+		margin:0;
+
+		padding:0;
+
+		list-style:none;
+
+		}
+
+	#slider li{ 
+
+		/* 
+
+			define width and height of list item (slide)
+
+			entire slider area will adjust according to the parameters provided here
+
+		*/ 
+
+		width: 780px;
+
+		height:210px;
+
+		overflow:hidden; 
+
+		}	
+
+	#prevBtn, #nextBtn{ 
+
+		display:block;
+
+		width:75px;
+
+		height:23px;
+
+		position:absolute;
+
+		left: 616px;
+
+		top: -37px;
+
+		}
+
+		
+
+	#nextBtn :hover, #prevBtn :hover { background-position: 0 100%; }
+
+
+
+	#nextBtn{ 
+
+		left: 700px;
+
+		display:block;
+
+		visibility: visible;
+
+		}														
+
+	#prevBtn a, #nextBtn a{  
+
+		display:block;
+
+		width:75px;
+
+		height:23px;
+
+		background:url(../images/prev_button.png) no-repeat 0 0;	
+
+		}	
+
+	#nextBtn a{ 
+
+		background:url(../images/next_button.png) no-repeat 0 0;
+
+		}	
+
+		
+
+	

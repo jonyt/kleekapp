@@ -1,7 +1,9 @@
-require "rubygems"
-require "bundler"
+$stdout.sync = true
 
-Bundler.require
+unless $LOAD_PATH.include? "."
+  $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__))
+end
 
-require "./app"
-run Sinatra::Application
+require 'app'
+
+run App.new

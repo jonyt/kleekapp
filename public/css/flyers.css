@@ -1,0 +1,868 @@
+@font-face {
+    font-family: 'JunegullRegular';
+    src: url('../fonts/junegull-webfont.eot');
+    src: url('../fonts/junegull-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/junegull-webfont.woff') format('woff'),
+         url('../fonts/junegull-webfont.ttf') format('truetype'),
+         url('../fonts/junegull-webfont.svg#JunegullRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+	
+@font-face {
+    font-family: 'Kenyan Coffee';
+    src: url('../fonts/kenyan coffee rg.otf') format('opentype');
+	src: url('../fonts/kenyan_coffee_rg.eot');
+    src: url('../fonts/kenyan_coffee_rg.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/kenyan_coffee_rg.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	}
+	
+
+@font-face {
+    font-family: 'TitilliumText22L004';
+    src: url('../fonts/TitilliumText22L004.otf') format('opentype');
+	src: url('../fonts/titilliumtext22l004.eot');
+    src: url('../fonts/titilliumtext22l004.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/titilliumtext22l004.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+	}	
+
+
+
+@font-face {
+    font-family: Harabara;
+     src: url('../fonts/Harabara.eot');
+     src: url('../fonts/Harabara.eot?#iefix') format('embedded-opentype'),
+          url('../fonts/Harabara.ttf') format('truetype'); 
+	}
+	
+@font-face {
+    font-family: Acknowledgement;
+      src: url('../fonts/ACKNO.eot');
+      src: url('../fonts/ACKNO.eot?#iefix') format('embedded-opentype'),
+           url('../fonts/ACKNO.ttf') format('truetype'); 
+	}
+
+@font-face {
+    font-family: CenturyGothic;
+      src: url('../fonts/centgtb.eot');
+      src: url('../fonts/centgtb.eot?#iefix') format('embedded-opentype'),
+           url('../fonts/centgtb.ttf') format('truetype'); ; 
+	font-weight: normal;
+	}
+	
+@font-face {
+    font-family: CenturyGothic;
+     src: url('../fonts/centgtb.eot');
+     src: url('../fonts/centgtb.eot?#iefix') format('embedded-opentype'),
+          url('../fonts/centgtb.ttf') format('truetype'); 
+	font-weight: bold;
+	}
+
+@font-face {
+    font-family: Cerebro;
+     src: url('../fonts/Cerebro.eot');
+    src: url('../fonts/Cerebro.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Cerebro.ttf') format('truetype');  
+	}
+	
+@font-face {
+    font-family: Opificio;
+     src: url('../fonts/Opificio.eot');
+     src: url('../fonts/Opificio.eot?#iefix') format('embedded-opentype'),
+          url('../fonts/Opificio.ttf') format('truetype');  
+	font-weight: normal;
+	}
+	
+@font-face {
+    font-family: Opificio;
+     src: url('../fonts/Opificio_Bold.eot');
+     src: url('../fonts/Opificio_Bold.eot?#iefix') format('embedded-opentype'),
+          url('../fonts/Opificio_Bold.ttf') format('truetype');  
+	font-weight: bold;
+	}
+	
+@font-face {
+    font-family: 'UltraRegular';
+    src: url('../fonts/Ultra.eot');
+    src: url('../fonts/Ultra.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Ultra.ttf') format('truetype'); 
+	}
+	
+	
+@font-face {
+    font-family: Vipnagorgialla;
+	src: url('../fonts/vipnagorgialla.eot');
+    src: url('../fonts/vipnagorgialla.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/vipnagorgialla.ttf') format('truetype');
+	}	
+
+
+/* CSS RESET */	
+
+html, body, div, span, applet, object, iframe, table, caption, tbody, tfoot, thead, tr, th, td, 
+del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, 
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, 
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
+	vertical-align: baseline;
+	
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	line-height: normal;
+	outline: 0;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	}
+
+:focus {
+	outline: 0;
+	}
+body {
+	background: white;
+	line-height: 1;
+	color: black;
+	}
+
+/* We don't want any flyer displayed before the first one. (P.S. A :not selector might have been nice if there was one before CSS3) */
+#flyer2 {
+    display : none;
+}
+#flyer3 {
+    display : none;
+}
+#flyer4 {
+    display : none;
+}
+	
+	
+/* FLYER 1 */
+
+#flyer1.flyerwrapper {
+	position:absolute;
+	width: 600px;
+	height: 420px;
+/*	top: 128px;
+	left: 214px; Content must be well-positioned after integration*/ 
+	overflow:hidden;
+	background: url(../images/flyer1_bg.jpg) no-repeat;
+}
+
+
+#flyer1 .leadintext {
+	position: absolute;
+	width: 328px;
+	height: 25px;
+	/*oveflow: hidden;*/
+	word-break: loose;
+	word-wrap: break-word;
+	top: 140px;
+	left: 40px;
+    font-family: Harabara;
+	font-size: 19px;
+	color: white;
+	background: transparent;
+}
+
+#flyer1 .eventtitle {
+	position: absolute;
+	width: 328px;
+	/*height: 103px;*/
+	word-break: loose;
+	word-wrap: break-word;
+	top: 302px;
+	left: 58px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 29px;
+	color: #ffffff;
+	background: transparent;
+	overflow: hidden;
+	text-transform:uppercase;
+	/*line-height: 10px;*/
+}
+
+#flyer1 .eventtitle p {   line-height: 33px; font-size: 29px; -webkit-margin-before: 0em;
+-webkit-margin-after: 0em;}
+
+#flyer1 .eventtime {
+	position: absolute;
+	width: 100px;
+	height: 25px;
+	top: 170px;
+	left: 408px;
+	font-family: Harabara;
+	font-size: 17px;
+	color: white;
+	background: transparent;
+}
+
+#flyer1 .eventdate {
+	position: absolute;
+	width: 190px;
+	height: 25px;
+	top: 185px;
+	left: 408px;
+	font-family: Harabara;
+	font-size: 15px;
+	color: white;
+	background: transparent;
+}
+
+
+#flyer1 .eventleft {
+	position: absolute;
+	display: inline-table;
+	width: 158px;
+	height: auto;
+	top: 212px;
+	left: 408px;
+	overflow: hidden;
+	background: transparent;
+}
+
+#flyer1 .eventplace {
+	position: relative;
+	display: block;
+	width: 155px;
+	height: auto;
+	font-family: Arial;
+	font-weight: 600;
+	font-size: 23px;
+	line-height: 23px;
+	letter-spacing: -1px;
+	padding: 5px 5px;
+	color: black;
+	background: #cc2127;
+	overflow:hidden;
+	word-break:loose;
+	word-wrap: break-word;
+}
+
+#flyer1 .eventaddress  {
+	position: relative;
+	display: inline-table;
+	width: 158px;
+	height: auto;
+	margin-top: 15px;
+	font-family: Opificio;
+	font-size: 18px;
+	line-height: 22px;
+	padding: 3px 3px;
+	color: #cc2127;
+	background: transparent;
+	border-top: 1px solid #cc2127;
+	border-bottom: 1px solid #cc2127;
+	overflow: hidden;
+	word-break:loose;
+	word-wrap: break-word;
+}
+	
+
+
+
+
+
+/* FLYER 2 */
+
+#flyer2.flyerwrapper {
+	position:absolute;
+	width: 600px;
+	height: 420px;
+/*	top: 128px;
+	left: 214px; Content must be well-positioned after integration*/ 
+	overflow:hidden;
+	background: url(../images/flyer2_bg.jpg) no-repeat;
+}
+
+
+#flyer2 .leadintext {
+	position: absolute;
+	display: block;
+	width: 433px;
+	height: 20px;
+	oveflow: hidden;
+	word-break: loose;
+	word-wrap: break-word;
+	top: 21px;
+	left: 80px;
+    font-family: Arial;
+	font-size: 13px;
+	font-weight: 400;
+	text-align: center;
+	text-transform:uppercase;
+	vertical-align: middle;
+	color: #e2007a;
+	background: transparent;
+	letter-spacing: 8px;
+}
+
+#flyer2 .eventtitle_container {
+	  top: 48px;
+    width: 500px;  
+	position: absolute;
+	  left: 48px;
+    overflow: hidden;
+	    display: block;
+		height:115px;
+}
+
+#flyer2 .eventtitle_container > #flyer2 .eventtitle {
+display: table;
+position: static;	
+
+}
+
+#flyer2 .eventtitle, #flyer2 .eventtitle_long {
+width: 500px;
+height: 100%;
+background:none;
+#position:relative;
+display: table;
+overflow:hidden;
+}
+
+#flyer2 .eventtitle div, #flyer2 .eventtitle_long div {
+#position:absolute;
+#top:50%;
+display:table-cell;
+vertical-align:middle;
+padding-top:2px;
+
+}
+
+#flyer2 .eventtitle_long div {
+
+#top:0px;
+
+}
+
+
+#flyer2 .eventtitle div div, #flyer2 .eventtitle_long div div {
+#position: relative;
+#top:-50%;
+
+
+}
+
+#flyer2 .eventtitle_long div div {
+#position: relative;
+#top:0px;
+padding-top:2px;
+
+}
+
+
+
+#flyer2 .eventtitle div div p, #flyer2 .eventtitle_long div div p {
+    font-family: 'JunegullRegular';
+width:500px;
+text-align:center;
+line-height:55px;
+color: #FFD33A;
+font-size:57px;
+-webkit-margin-before: 1px;
+-webkit-margin-after: 0em;
+}
+
+#flyer2 .eventtime p, #flyer2 .eventdate p {
+	    font-family: 'TitilliumText22L004';  
+		  font-size: 17px;
+    font-weight: 600;
+    height: 25px;  
+	 top: 179px;    
+	 position: absolute;
+}
+
+#flyer2 .eventtime p{
+    color: #278CC8;
+
+   
+  left: 149px;
+
+    text-align: right;
+    width: 90px;
+}
+
+#flyer2 .eventdate p{
+   color: #E2007A;
+
+
+    left: 267px;
+
+    text-transform: uppercase;
+ 
+    width: 200px;
+}
+
+
+
+#flyer2 .eventplace p {
+	position: absolute;
+	width: 560px;
+	height: 30px;
+	top: 232px;
+	left: 20px;
+	font-family: 'JunegullRegular';
+
+	font-weight: 600;
+	font-size: 20px;
+	text-transform: uppercase;
+	text-align: center;
+	letter-spacing: 6px;
+	color: white;
+	background: transparent;
+	overflow:hidden;
+}
+
+#flyer2 .eventaddress p  {
+	position: absolute;
+	display: block;
+	width: 440px;
+	height: 63px;
+	top: 279px;
+	left: 83px;
+	font-family: 'JunegullRegular';
+
+	font-weight: 600;
+	font-size: 23px;
+	text-transform: uppercase;
+	line-height: 24px;
+	text-align: center;
+	color: #7f0060;
+	background: transparent;
+	overflow: hidden;
+	
+	 background: none repeat scroll 0 0 transparent;
+
+    display: block;
+    font-family: 'JunegullRegular';
+
+    height: 63px;
+
+
+
+    word-wrap: break-word;
+}	
+
+#flyer2 .eventaddress p {
+	vertical-align: middle; 
+	display: table-cell; 
+	font-family: 'JunegullRegular'; 
+	height: 63px;
+	
+    line-height: 58px;
+    vertical-align: middle;
+    width: 440px;
+	
+	}
+
+
+
+
+/* FLYER 3 */
+
+#flyer3.flyerwrapper {
+	position:absolute;
+	width: 600px;
+	height: 420px;
+/*	top: 128px;
+	left: 214px; Content must be well-positioned after integration*/ 
+	overflow:hidden;
+	background: url(../images/flyer3_bg.jpg) no-repeat;
+}
+
+
+#flyer3 .leadintext {
+	position: absolute;
+	width: 433px;
+	height: 20px;
+	overflow: hidden;
+	top: 21px;
+	left: 150px;
+    font-family: CenturyGothic;
+	font-weight: bold;
+	font-size: 12px;
+	text-transform:uppercase;
+	text-align: right;
+	color: #ffffff;
+	background: transparent;
+	}
+
+#flyer3 .container {
+	position: absolute;
+	width: 533px;
+	height: 300px;
+	top: 70px;
+	left: 40px;
+	background: transparent;
+}
+
+#flyer3 .eventtitle p {
+	position: relative;
+display: inline-table;
+width: 533px;
+height: auto;
+overflow: hidden;
+top: 0px;
+left: 0px;
+font-family: CenturyGothic;
+font-weight: bold;
+font-size: 65px;
+letter-spacing: -2px;
+text-transform: uppercase;
+text-align: left;
+color: white;
+background: transparent;
+line-height: 62px;
+		}
+	
+#flyer3 .eventtitle p {vertical-align: middle; display: table-cell;	line-height: 62px;}
+
+#flyer3 .eventplace p {
+position: relative;
+width: 533px;
+height: 33px;
+overflow: hidden;
+top: 0px;
+left: 0px;
+font-family: CenturyGothic;
+font-weight: bold;
+font-size: 28px;
+letter-spacing: -1px;
+text-transform: uppercase;
+text-align: left;
+color: white;
+background: transparent;
+margin-bottom: 0px;
+}
+	
+/*#flyer3 .eventplace p {
+	position: relative;
+	width: 533px;
+	height: 33px;
+	overflow: hidden;
+	top: 0px;
+	left: 0px;
+    font-family: CenturyGothic;
+	font-weight: bold;
+	font-size: 28px;
+	letter-spacing: -1px;
+	text-transform:uppercase;
+	text-align: left;
+	color: #ffffff;
+	background: transparent;
+	}*/	
+
+#flyer3 .eventaddress p {
+	position: relative;
+	width: 533px;
+	height: 33px;
+	overflow: hidden;
+	top: -4px;
+	left: 0px;
+    font-family: CenturyGothic;
+	font-weight: bold;
+	font-size: 20px;
+	text-transform:uppercase;
+	text-align: left;
+	letter-spacing: -1px;
+	color: #ffffff;
+	background: transparent;
+	}	
+	
+#flyer3 .eventtime p {
+	position: absolute;
+width: 500px;
+height: 103px;
+overflow: hidden;
+top: 300px;
+left: 40px;
+font-family: CenturyGothic;
+font-weight: bold;
+font-size: 55px;
+text-align: left;
+line-height: 69px;
+color: white;
+background: transparent;
+	}	
+	
+#flyer3 .eventdate p {
+	position: absolute;
+	width: 333px;
+	height: 63px;
+	overflow: hidden;
+	top: 360px;
+	left: 43px;
+    font-family: CenturyGothic;
+	font-weight: bold;
+	font-size: 25px;
+	text-transform:capitalize;
+	text-align: left;
+	color: #ffffff;
+	background: transparent;
+	}
+
+
+
+
+
+/* FLYER 4 */
+
+#flyer4.flyerwrapper {
+	position:absolute;
+	width: 600px;
+	height: 420px;
+
+	overflow:hidden;
+	background: url(../images/flyer4_bg.jpg) no-repeat;
+}
+
+#flyer4 .leadintext {
+	position: absolute;
+	width: 433px;
+	height: 20px;
+	overflow: hidden;
+	word-break: loose;
+	word-wrap: break-word;
+	top: 43px;
+	left: 80px;
+   	 font-family: Acknowledgement;
+	font-size: 18px;
+	text-align: center;
+	color: #f3f0dd;
+	background: transparent;
+}
+
+#flyer4 .leadintext p {
+	 font-family: Acknowledgement;
+}
+
+
+#flyer4 .eventtitle_container {
+	top: 80px;
+	left: 55px;
+    width: 500px;  
+	position: absolute;
+	
+    overflow: hidden;
+	    display: block;
+		height:117px;
+}
+
+#flyer4 .eventtitle_container > #flyer4 .eventtitle {
+display: table;
+position: static;	
+
+}
+
+#flyer4 .eventtitle, #flyer4 .eventtitle_long {
+width: 500px;
+height: 100%;
+background:none;
+#position:relative;
+display: table;
+overflow:hidden;
+}
+
+#flyer4 .eventtitle div, #flyer4 .eventtitle_long div {
+#position:absolute;
+#top:50%;
+display:table-cell;
+vertical-align:middle;
+
+
+}
+
+#flyer4 .eventtitle_long div {
+
+#top:0px;
+
+}
+
+
+#flyer4 .eventtitle div div, #flyer4 .eventtitle_long div div {
+#position: relative;
+#top:-50%;
+
+
+}
+
+#flyer4 .eventtitle_long div div {
+#position: relative;
+#top:0px;
+
+
+}
+
+
+
+#flyer4 .eventtitle div div p, #flyer4 .eventtitle_long div div p {
+line-height: 60px;
+  font-family: 'Kenyan Coffee';
+width:500px;
+text-align:center;
+color: #FFD33A;
+font-size: 67px;
+	text-transform: uppercase;
+font-weight:bold;
+	color: #005a7d;
+}
+
+
+
+#flyer4 .eventtime p{
+	position: absolute;
+	width: 70px;
+	height: 70px;
+	overflow: hidden;
+	word-break: loose;
+	word-wrap: break-word;
+	top: 230px;
+	left: 164px;
+    font-family: 'Kenyan Coffee';
+	font-style: normal;
+	font-weight: normal;
+	font-size: 41px;
+	text-align: right;
+	color: #f2efda;
+	background: transparent;
+}
+
+#flyer4 .eventtime span {display: inline; position: relative; font-size: 18px; top: 273px; left: 215px; text-transform: uppercase;
+    font-family: 'Kenyan Coffee';
+	font-style: normal;
+	font-weight: normal;
+	font-size: 20px;
+	text-align: right;
+	color: #f2efda;
+}
+
+#flyer4 .eventdate {
+	position: absolute;
+	width: 73px;
+	height: 70px;
+	overflow: hidden;
+	top: 230px;
+	left: 70px;
+    font-family: 'UltraRegular';
+	text-transform:uppercase;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 24px;
+	line-height: 24px;
+	text-align: center;
+	color: #005a7d;
+	background: transparent;
+}
+
+#flyer4 .eventdate span {display: block; color: #95a2a3; font-family: Vipnagorgialla; font-size: 34px; line-height: 20px; }
+
+#flyer4 .eventdate p {display: inline; font-size: 26px; line-height: 27px;  font-family: 'UltraRegular';}
+
+/*
+#flyer4 .eventplace {
+	position: absolute;
+	display: inline-table;
+	width: 245px;
+	height: 70px;
+	overflow: hidden;
+	top: 227px;
+	left: 290px;
+ 
+	font-weight: normal;
+	font-style: normal;
+	font-size: 37px;
+	
+	text-align: center;
+	
+	background: transparent;
+}
+
+#flyer4 .eventplace p {vertical-align: middle; display: table-cell;line-height: 37px;  color: #005a7d;  font-family: 'Kenyan Coffee';}
+*/
+
+#flyer4 .eventplace_container {
+	  display: block;
+    height: 80px;
+    left: 280px;
+    overflow: hidden;
+    position: absolute;
+    top: 224px;
+    width: 245px;
+
+}
+
+
+
+#flyer4 .eventplace {
+width: 245px;
+height: 100%;
+background:none;
+#position:relative;
+display: table;
+overflow:hidden;
+}
+
+#flyer4 .eventplace div {
+#position:absolute;
+#top:50%;
+display:table-cell;
+vertical-align:middle;
+
+
+}
+
+
+
+
+#flyer4 .eventplace div div {
+#position: relative;
+#top:-50%;
+
+
+}
+
+
+
+
+#flyer4 .eventplace div div p{
+  color: #005A7D;
+    font-family: 'Kenyan Coffee';
+    font-size: 35px;
+    line-height: 40px;
+    text-align: center;
+    width: 245px;
+}
+
+
+
+
+
+#flyer4 .eventaddress p{
+	position: absolute;
+	width: 380px;
+	height: 30px;
+
+	top: 333px;
+	left: 110px;
+    font-family: 'Kenyan Coffee';
+	font-weight: normal;
+	font-style: normal;
+	font-size: 30px;
+	text-align: center;
+	color: #f3f0dd;
+	background: transparent;
+}
+
+.flyer_content {
+    margin: 20px auto;
+    position: relative;
+    width: 725px;
+    z-index: 1111;
+}
