@@ -7,7 +7,11 @@
         evaluate: /\{\{(.+?)\}\}/g
     };
 
+    var vent = {};
+    $.extend(vent, Backbone.Events);
+
 	window.App = {
+		vent: vent,
 		Models: {},
 		Collections: {},
 		Views: {},
@@ -28,5 +32,6 @@
 		var venueCollection = new App.Collections.Venues();
 		new App.Views.VenueSearch({el: $('#content1'), collection: venueCollection});	
 		new App.Views.VenueList({el: $('#slider ul'), collection: venueCollection});
+		new App.Views.SearchLoading({el: $('#map-loading img'), collection: venueCollection});		
 	});	
 }());

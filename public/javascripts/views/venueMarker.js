@@ -28,8 +28,8 @@
 			this.marker.setMap(null);
 			this.marker = null;
 
-			google.maps.removeListener(this.mouseoverListener);
-			google.maps.removeListener(this.mouseoutListener);
+			google.maps.event.removeListener(this.mouseoverListener);
+			google.maps.event.removeListener(this.mouseoutListener);
 
 			return Backbone.View.prototype.remove.call(this, options);
 		}

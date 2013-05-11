@@ -13,10 +13,11 @@
 			this.venueType = this.$('#select1');
 			this.venueType.yaselect();
 			this.markers = [];
+			this.geocoder = new google.maps.Geocoder();
 
 			var view = this;
 			google.maps.event.addListener(this.map, 'tilesloaded', function(){
-				$('#map-loading').hide();
+				App.vent.trigger('search:started');
 				view.collection.fetch({mapBounds: this.getBounds(), category: view.venueType.val()});
 		    });
 
@@ -25,6 +26,36 @@
 		events: {
 			'click #venueSearchButton': function(e){
 				google.maps.event.trigger(this.map, 'tilesloaded');
+			},
+			'submit #addressForm': function(){
+				var view = this,
+					addressField = this.$('#search'),
+					address = addressField.val();
+
+				addressField.val('');	
+
+				if ($.trim(address).length == 0){
+					return false;
+				}	
+
+				this.geocoder.geocode( { 
+			        'address': address
+			    }, function(results, status) {		
+			        if (status == google.maps.GeocoderStatus.OK) {
+						view.map.setCenter(results[0].geometry.location);		
+			        } else {
+						/*$('#map-loading').fadeOut();
+						$().toastmessage('showToast', {
+							text     : "Couldn't find this address, please try again",
+							position : 'top-center',
+							type     : 'error'           
+						});*/
+			        // All possible codes are given in http://code.google.com/apis/maps/documentation/javascript/reference.html
+			        // under google.maps.GeocoderStatus class
+			        }
+			    });
+
+			    return false;
 			}
 		},
 		render: function(){
@@ -38,7 +69,9 @@
 			    	map: view.map, 
 			    	category: view.venueType.val()
 			    }));
-			});			
+			});	
+
+			App.vent.trigger('map:rendered');		
 		}
 	});
 

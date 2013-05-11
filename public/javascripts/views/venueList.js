@@ -4,6 +4,7 @@
 			this.listenTo(this.collection, 'reset', this.render);
 		},	
 		render: function(){
+			this.$el.empty();
 			for (var i = 0; i < this.collection.models.length; i+= 3){
 				var frame = new App.Views.VenueListFrame({
 					collection: new App.Collections.Venues(this.collection.slice(i, i + 3))
