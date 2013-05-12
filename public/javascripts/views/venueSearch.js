@@ -12,8 +12,11 @@
 
 			this.venueType = this.$('#select1');
 			this.venueType.yaselect();
+			this.venueType.css('visibility', 'visible');
 			this.markers = [];
 			this.geocoder = new google.maps.Geocoder();
+
+			this.$('#search').val('');
 
 			var view = this;
 			google.maps.event.addListener(this.map, 'tilesloaded', function(){
@@ -26,6 +29,16 @@
 		events: {
 			'click #venueSearchButton': function(e){
 				google.maps.event.trigger(this.map, 'tilesloaded');
+			},
+			'keydown #search': function(e){
+				var $input = $(e.target);
+				if ($.trim($input.val()).length == 0){
+					if (!$input.hasClass('blurred')){
+						$input.addClass('blurred');
+					}
+				} else {
+					$input.removeClass('blurred');
+				}
 			},
 			'submit #addressForm': function(){
 				var view = this,

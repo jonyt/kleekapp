@@ -12,9 +12,11 @@
 			var divOverlay = new DivOverlay(this.model.get('name'), options.map, this.marker.getPosition());
 			divOverlay.hide();
 
+			var model = this.model;
 			this.mouseoverListener = google.maps.event.addListener(this.marker, 'mouseover', function() {
 			    this.timer = setTimeout(function(){
 			        divOverlay.show();
+			        App.vent.trigger('marker:mouseover', model);
 				}, 150);
 			});
 			this.mouseoutListener = google.maps.event.addListener(this.marker, 'mouseout', function() {
