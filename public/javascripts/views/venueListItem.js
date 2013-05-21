@@ -7,7 +7,10 @@
 			this.listenTo(this.model, 'destroy', this.remove);
 		},
 		events: {
-			'click li.event': function(e){
+			'click .result_button': function(e){
+				App.vent.trigger('page:transition', 2);
+				var eventModel = new App.Models.Event(this.model.attributes);
+				new App.Views.CreateEvent({model: eventModel, el: $('#eventForm')})
 			}
 		},
 		render: function(){

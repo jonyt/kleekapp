@@ -17,13 +17,14 @@
 					limit	 : 15
 				},
 				collection = this;
-
+			
+			App.vent.trigger('search:started');
+				
 		    $.ajax({
 		        url: this.url,
 		        dataType: 'jsonp',
 		        data: params,
 		        success : function(data) {
-		        	console.log($(data.businesses).map(function(){return this.name;}));
 		            collection.reset(data.businesses);
 		        }
 		    });	

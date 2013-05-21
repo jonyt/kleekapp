@@ -14,21 +14,21 @@
 			this.venueType.yaselect();
 			this.venueType.css('visibility', 'visible');
 			this.markers = [];
-			this.geocoder = new google.maps.Geocoder();
-
-			this.$('#search').val('');
 
 			var view = this;
-			google.maps.event.addListener(this.map, 'tilesloaded', function(){
-				App.vent.trigger('search:started');
-				view.collection.fetch({mapBounds: this.getBounds(), category: view.venueType.val()});
+			google.maps.event.addListenerOnce(this.map, 'tilesloaded', function(){				
+				view.resetCollection(view);
 		    });
 
-		    this.listenTo(this.collection, 'reset', this.render);			
+		    this.listenTo(this.collection, 'reset', this.render);	
+		    this.listenTo(App.vent, 'map:changeLocation', function(newCenter){
+		    	this.map.setCenter(newCenter);
+		    	view.resetCollection(view);
+		    });			
 		},
 		events: {
 			'click #venueSearchButton': function(e){
-				google.maps.event.trigger(this.map, 'tilesloaded');
+				this.resetCollection(this);
 			},
 			'keydown #search': function(e){
 				var $input = $(e.target);
@@ -39,36 +39,6 @@
 				} else {
 					$input.removeClass('blurred');
 				}
-			},
-			'submit #addressForm': function(){
-				var view = this,
-					addressField = this.$('#search'),
-					address = addressField.val();
-
-				addressField.val('');	
-
-				if ($.trim(address).length == 0){
-					return false;
-				}	
-
-				this.geocoder.geocode( { 
-			        'address': address
-			    }, function(results, status) {		
-			        if (status == google.maps.GeocoderStatus.OK) {
-						view.map.setCenter(results[0].geometry.location);		
-			        } else {
-						/*$('#map-loading').fadeOut();
-						$().toastmessage('showToast', {
-							text     : "Couldn't find this address, please try again",
-							position : 'top-center',
-							type     : 'error'           
-						});*/
-			        // All possible codes are given in http://code.google.com/apis/maps/documentation/javascript/reference.html
-			        // under google.maps.GeocoderStatus class
-			        }
-			    });
-
-			    return false;
 			}
 		},
 		render: function(){
@@ -85,6 +55,9 @@
 			});	
 
 			App.vent.trigger('map:rendered');		
+		},
+		resetCollection: function(view){
+			view.collection.fetch({mapBounds: view.map.getBounds(), category: view.venueType.val()});
 		}
 	});
 
