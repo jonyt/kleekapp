@@ -1,11 +1,15 @@
-(function () {	
+(function () {
+	function _getAddress(address1, city){
+		return ($.trim(address1).length == 0 ? city : address1 + ', ' + city);
+	}
+
 	var venue = Backbone.Model.extend({
 		initialize: function(){
 			var sortedReviews = _.sortBy(this.get('reviews'), function(review){
 				return review.text_excerpt.length;
 			}),
 				longestReview = _.last(sortedReviews);
-				address = ($.trim(this.get('address1')).length == 0 ? this.get('city') : this.get('address1') + ', ' + this.get('city'));
+				address = _getAddress(this.get('address1'), this.get('city'));
 			
 			this.set('reviewText', longestReview.text_excerpt); 
 			this.set('address', address);

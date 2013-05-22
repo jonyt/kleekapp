@@ -2,35 +2,47 @@
 	var createEvent = Backbone.View.extend({		
 		initialize: function(options){		
 			this.$('#select2').yaselect2();
-			jQuery.validator.addMethod("timeAfterNow", function(value, element) {
-				console.log(this);
-				/*var selectedDate = new Date(value)
-				var hourAndMinutes = eventTime.val().split(':');
+			this.$('#datepicker').datepicker({minDate: 0});
+
+			var view = this;
+
+			jQuery.validator.addMethod("timeAfterNow", function(value, element) {				
+				var $element = $(element),
+					$timeSelector = $element.parent('li').next('li').find('select'),
+					selectedDate = new Date(value),
+					hourAndMinutes = $timeSelector.val().split(':');
 				selectedDate.setHours(hourAndMinutes[0]);
 				selectedDate.setMinutes(hourAndMinutes[1]);
-				return (selectedDate > new Date());*/
-				return false;
+				return (selectedDate > new Date());
 			}, "Event must start in the future");
-			this.validate({
+			
+			this.$el.validate({
 		        rules: {
 		            title: {required : true, maxlength : 32},
 		            startdate: {required : true, date : true, timeAfterNow : true},
 		            desc: {maxlength : 200}
 		        },
 		        messages: {
-		            title: {required  : 'Please enter a title for the event', maxlength : 'Title is too long'},
-		            startdate: {required  : 'Please enter a date', date : 'Please enter a valid date'},
-		            desc: {maxlength : 'Description is too long'}
+		            title: {required: 'Please enter a title for the event', maxlength: 'Title is too long'},
+		            startdate: {required: 'Please enter a date', date: 'Please enter a valid date'},
+		            desc: {maxlength: 'Description is too long'}
 		        },
 		        errorPlacement: function(error, element) {
 		            error.insertAfter(element);
 		        },
-				submitHandler : function() {
+				submitHandler : function() {					
+					view.model.set('eventName', view.$('#event_title').val());
+					view.model.set('description', view.$('#event_description').val());
+					view.model.set('privacy_type', view.$('input[name="privacy"]:checked').val());
+					
+					var dateString = view.$('#datepicker').val(),
+						timeString = view.$('#select2').val(),
+						eventDate  = new Date(Date.parse(dateString + " " + timeString));
+					view.model.set('start_time', eventDate.toISOString());
+					
+					view.model.save();
 					App.vent.trigger('page:transition', 3);
 
-					// Update model attributes with name,d esc etc.
-					
-					
 					return false;
 				}
 		    });
