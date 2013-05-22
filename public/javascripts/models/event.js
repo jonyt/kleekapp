@@ -2,7 +2,8 @@
 // See http://developers.facebook.com/docs/reference/api/user/#events 
 (function () {	
 	var eventModel = Backbone.Model.extend({
-		sync: function(method, model, options){
+                urlRoot: '/me/events',
+		save: function(attributes, options){
 			var params = {
         			name: this.get('eventName'),
         			description: this.get('description'),
@@ -10,6 +11,8 @@
         			privacy_type: this.get('privacy_type'),
         			start_time: this.get('start_time')
         		};
+                        if (options.success) options.success();
+                        
 			/*FB.api(
         		'/me/events',
         		'post',

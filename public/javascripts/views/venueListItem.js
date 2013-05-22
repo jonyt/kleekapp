@@ -9,7 +9,8 @@
 		events: {
 			'click .result_button': function(e){
 				App.vent.trigger('page:transition', 2);
-				var eventModel = new App.Models.Event(this.model.attributes);
+				// Delete id key from attributes so that model isNew will be false
+				var eventModel = new App.Models.Event(this.model.omit('id')); 
 				new App.Views.CreateEvent({model: eventModel, el: $('#eventForm')})
 			}
 		},

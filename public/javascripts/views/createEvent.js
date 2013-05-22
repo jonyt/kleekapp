@@ -40,7 +40,9 @@
 						eventDate  = new Date(Date.parse(dateString + " " + timeString));
 					view.model.set('start_time', eventDate.toISOString());
 					
-					view.model.save();
+					view.model.save({}, {success: function(){
+						console.log('success');
+					}});
 					App.vent.trigger('page:transition', 3);
 
 					return false;
