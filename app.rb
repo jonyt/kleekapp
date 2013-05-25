@@ -4,14 +4,10 @@ require 'koala'
 class App < Sinatra::Base
   include ERB::Util
 
-  set :static, true
-  set :public_folder, File.dirname(__FILE__) + '/public'
+  enable :static
 
   get "/" do
     @app_id = ENV["FACEBOOK_APP_ID"] || '177298079073438'
-    
-    #puts settings.public_folder
-    #puts Dir.glob("#{settings.public_folder}/*").inspect
 
     erb :index
   end
