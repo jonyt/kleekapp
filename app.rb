@@ -10,6 +10,8 @@ class App < Sinatra::Base
   get "/" do
     @app_id = ENV["FACEBOOK_APP_ID"] || '177298079073438'
     
+    puts settings.public_folder
+
     erb :index
   end
 
