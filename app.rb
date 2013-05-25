@@ -5,7 +5,6 @@ class App < Sinatra::Base
   include ERB::Util
 
   enable :static
-  set :public_folder, File.dirname(__FILE__) + '/public/'
 
   get "/" do
     @app_id = ENV["FACEBOOK_APP_ID"] || '177298079073438'
