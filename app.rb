@@ -4,6 +4,7 @@ require 'koala'
 class App < Sinatra::Base
   include ERB::Util
 
+  set :protection, :except => [:frame_options, :session_hijacking]
   enable :static
 
   get "/" do
