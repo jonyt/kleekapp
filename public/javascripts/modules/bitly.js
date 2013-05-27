@@ -19,7 +19,8 @@ window.Bitly = (function () {
 					apiKey: 'R_560232685a3e47ab91307b917b0990a8',
 					format: 'json'
 				},
-				success: function(response){ onSuccess(response.data.url); }
+				success: function(response){ console.log(response); onSuccess(response.data.url); },
+				error: function(error){ console.log(error); console.log('error')}
 			}); 
 		}
 	}	   

@@ -5,7 +5,6 @@
 		save: function(attributes, options){
                         var model = this,
                             onSuccess = function(eventId){
-                                console.log(model.attributes);
                                 model.set('id', eventId);
                                 
                                 var category = model.get('categories')[0].category_filter,
@@ -22,9 +21,12 @@
                                         hour: startTime.getUTCHours(),
                                         minute: startTime.getUTCMinutes()           
                                     }),     
-                                    mapUrl = "http://" + window.location.host + "/map?" + encodedParams;
-
-                                var bitly = new Bitly();
+                                    mapUrl = "http://kleekapp.com" + "/map?" + encodedParams;
+                                //TODO: change to window.location.href
+                                    
+                                //TODO: load picture from kleekapp.com
+                                var bitly = new Bitly(),
+                                    mapIcon = 'http://icons.iconarchive.com/icons/double-j-design/apple-festival/72/app-map-icon.png';    
                                 bitly.shorten(mapUrl, function(shortUrl){
                                         Facebook.postLink(eventId, 'How to get there', shortUrl, function(){}, function(error){
                                                 console.log(error);
