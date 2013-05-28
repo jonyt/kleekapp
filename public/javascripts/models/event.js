@@ -2,12 +2,22 @@
 // See http://developers.facebook.com/docs/reference/api/user/#events 
 (function () {	
 	var eventModel = Backbone.Model.extend({
+        initialize: function(){
+            var model = this;
+            Facebook.getUsername(function(response){
+                model.set('userFirstName', response.first_name);
+            }, function(){
+                //TODO: report and throw error
+            });
+        },
 		save: function(attributes, options){
                         var model = this,
                             onSuccess = function(eventId){
                                 model.set('id', eventId);
                                 
-                                var category = model.get('categories')[0].category_filter,
+                                App.vent.trigger('event:created', model);;
+
+                                var category = model.get('category'),
                                     startTime = new Date(model.get('start_time')),    
                                     encodedParams = $.param({
                                         title: model.get('name'),
@@ -21,7 +31,7 @@
                                         hour: startTime.getUTCHours(),
                                         minute: startTime.getUTCMinutes()           
                                     }),     
-                                    mapUrl = "http://kleekapp.com" + "/map?" + encodedParams;
+                                    mapUrl = "http://www.kleekapp.com" + "/map?" + encodedParams;
                                 //TODO: change to window.location.href
                                     
                                 //TODO: load picture from kleekapp.com
@@ -44,7 +54,22 @@
                                 onSuccess,
                                 function(error){console.log(error)}
                         );
-		}
+		},
+        inviteFriends: function(friendIds, options){
+            var onSuccess = function(){
+                    //TODO: report to ga
+                    if (typeof options.success == 'function'){
+                        options.success.call(this);
+                    }
+                },
+                onError = function(){
+                    //TODO: report to ga
+                    if (typeof options.error == 'function'){
+                        options.error.call(this);
+                    }
+                };
+            Facebook.inviteFriends(this.get('id'), friendIds, onSuccess, onError);
+        }
 	});
 	
 	App.Models.Event = eventModel;	

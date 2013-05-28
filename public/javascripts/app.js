@@ -36,5 +36,9 @@
 		new App.Views.AddressSearch({el: $('#addressForm')});	
 		new App.Views.PageController({el: $('#maincontainer')});
 		new App.Views.PageNumber({el: $('.stepscontainer')});
+
+		App.vent.on('facebook:initialized', function(){
+			new App.Views.InviteFriends({el: $('#page3')});
+		});
 	});	
 }());

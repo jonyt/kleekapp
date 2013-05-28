@@ -208,10 +208,9 @@
 </div>            
 <div id="page4" class="item">
  <div id="content4">
-  <!--div class="back2map"><a class="panel" href="#" onclick="moveToPage(3, 2);;$('#maincontainer').scrollTo($('#page2'), 800);"><img alt="" src="images/back2map.png" /></a></div-->
-  <div class="flyertext">We're creating your event, please choose a flyer.</div>
+  <div class="flyertext">You can choose a flyer.</div>
   <div class="mainflyer">
-   <div class="flyerwrapper" id="flyer1">
+   <!--div class="flyerwrapper" id="flyer1">
     <div class="leadintext">Johnny invites you to</div>
     <div  class="eventtitle">
      <p tabindex="disabled">THE GREAT TITLE GOES HERE</p>
@@ -279,7 +278,7 @@
  </div>
 </div>
 <div class="eventaddress">645 Park Ave. Port Chester Wa. 5545 B.</div>
-</div>
+</div-->
 </div>
 <div class="flyerholder">
  <div title="flyer1" class="flyers"><img alt="Flyer Preview" src="images/flyer_thumbnails/flyer_1.jpg" /></div>
@@ -326,6 +325,89 @@
    </div>
 </script>
 
+<script type="text/template" id="flyer1-template">
+  <div class="flyerwrapper" id="flyer1">
+     <div class="leadintext">{{= owner }} invites you to</div>
+     <div class="eventtitle">
+        <p tabindex="disabled">{{= title }}</p>
+     </div>
+     <div class="eventtime">{{= formattedTime }}</div>
+     <div class="eventdate">{{= formattedDate }}</div>
+     <div class="eventleft">
+        <div class="eventplace">
+           <p>{{= venue }}</p>
+        </div>
+        <div class="eventaddress">{{= address }}</div>
+     </div>
+  </div>  
+</script>
+<script type="text/template" id="flyer2-template">
+  <div class="flyerwrapper" id="flyer2">
+  <div class="leadintext">{{= owner }} invites you to</div>
+  <div class="eventtitle_container">
+     <div class="eventtitle">
+        <div>
+           <div>
+              <p>{{= title }}</p>
+           </div>
+        </div>
+     </div>
+  </div>
+  <div class="eventtime">{{= formattedTime }}</div>
+  <div class="eventdate">{{= formattedDate }}</div>
+  <div class="eventplace">
+     <p>{{= venue }}</p>
+  </div>
+  <div class="eventaddress">
+     <p>{{= address }}</p>
+  </div>
+</script>
+
+<script type="text/template" id="flyer3-template">
+  <div class="flyerwrapper" id="flyer3">
+     <div class="leadintext">{{= owner }} invites you to</div>
+     <div class="container">
+        <div class="eventtitle">
+           <p>{{= title }}</p>
+        </div>
+        <div class="eventplace">
+           <p>{{= venue }}</p>
+        </div>
+        <div class="eventaddress">{{= address }}</div>
+     </div>
+     <div class="eventtime">{{= formattedTime }}</div>
+     <div class="eventdate">{{= formattedDate }}</div>
+  </div>
+</script>
+
+<script type="text/template" id="flyer4-template">  
+  <div class="flyerwrapper" id="flyer4">
+  <div class="leadintext">{{= owner }} presents</div>
+  <div class="eventtitle_container">
+     <div class="eventtitle">
+        <div>
+           <div>
+              <p>{{= title }}</p>
+           </div>
+        </div>
+     </div>
+  </div>
+  <div class="eventtime">{{= formattedTime }}</div>
+  <div class="eventdate">
+     {{= formattedDate }}
+  </div>
+  <div class="eventplace_container">
+     <div class="eventplace">
+        <div>
+           <div>
+              <p>{{= venue }}</p>
+           </div>
+        </div>
+     </div>
+  </div>
+  <div class="eventaddress">{{= address }}</div>
+</script>
+
 <script type="text/javascript" src="//maps.google.com/maps/api/js?v=3.4&sensor=false"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script> 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
@@ -340,6 +422,7 @@
 <script type="text/javascript" src="/javascripts/lib/divoverlay.js"></script>
 <script type="text/javascript" src="/javascripts/lib/jquery.dotdotdot-1.3.0-packed.js"></script>
 <script type="text/javascript" src="/javascripts/lib/easySlider1.7.js"></script>
+<script type="text/javascript" src="/javascripts/lib/jquery.facebook.multifriend.select.js"></script>
 
 <script type="text/javascript" src="/javascripts/modules/bitly.js"></script>
 
@@ -357,6 +440,9 @@
 <script type="text/javascript" src="/javascripts/views/pageController.js"></script>
 <script type="text/javascript" src="/javascripts/views/pageNumber.js"></script>
 <script type="text/javascript" src="/javascripts/views/createEvent.js"></script>
+<script type="text/javascript" src="/javascripts/views/inviteFriends.js"></script>
+<script type="text/javascript" src="/javascripts/views/flyer.js"></script>
+<script type="text/javascript" src="/javascripts/views/flyerContainer.js"></script>
 
 </body>
 </html>

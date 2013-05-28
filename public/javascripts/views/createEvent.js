@@ -42,6 +42,8 @@
 					
 					view.model.save({}, {success: function(){
 						console.log('success');
+						new App.Views.FlyerContainer({el: $('#page4'), model: view.model});
+						//TODO: report to ga
 					}});
 					App.vent.trigger('page:transition', 3);
 

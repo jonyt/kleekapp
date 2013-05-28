@@ -1,4 +1,42 @@
 window.Facebook = (function () {
+
+	var permsNeeded = ['create_event', 'publish_stream'];
+    	
+	function handleBadLoginState(permissions){
+		//TODO: fill this in
+	}
+
+    // Function that checks needed user permissions
+    function checkPermissions() {
+      FB.api('/me/permissions', function(response) {
+        var permsArray = response.data[0];
+
+        var permsToPrompt = [];
+        for (var i in permsNeeded) {
+          if (permsArray[permsNeeded[i]] == null) {
+            permsToPrompt.push(permsNeeded[i]);
+          }
+        }
+        
+        if (permsToPrompt.length > 0) {
+          handleBadLoginState(permsToPrompt);
+        } else {
+        	var counter = 0,
+	      	    timer = setInterval(function(){
+			      	if (typeof App != 'undefined'){
+			      		clearInterval(timer);
+			      		App.vent.trigger('facebook:initialized');           
+			      	} else if (counter > 1000){
+			      		clearInterval(timer);
+			      		// TODO: notify ga
+			        } else {
+			      		counter++;
+			      	}
+			    }, 20);
+        }
+      });
+    };
+
 	var facebookConstructor = function Facebook(appId, channelFile){
 		if(false === (this instanceof Facebook)) {
 	        return new Facebook();
@@ -11,7 +49,8 @@ window.Facebook = (function () {
 	            status     : true,                                    // check login status
 	            cookie     : true,                                    // enable cookies to allow the server to access the session
 	            xfbml      : true                                     // parse XFBML
-	          });        
+	          }); 	      
+
 	      FB.getLoginStatus(function(response) {
 	        if (response.status === 'connected') {
 	          checkPermissions();
@@ -32,31 +71,7 @@ window.Facebook = (function () {
 	      js.src = "//connect.facebook.net/en_US/all.js";
 	      fjs.parentNode.insertBefore(js, fjs);
 	    }(document, 'script', 'facebook-jssdk'));
-	}
-
-	var permsNeeded = ['create_event', 'publish_stream'];
-    	
-	function handleBadLoginState(permissions){
-
-	}
-
-    // Function that checks needed user permissions
-    function checkPermissions() {
-      FB.api('/me/permissions', function(response) {
-        var permsArray = response.data[0];
-
-        var permsToPrompt = [];
-        for (var i in permsNeeded) {
-          if (permsArray[permsNeeded[i]] == null) {
-            permsToPrompt.push(permsNeeded[i]);
-          }
-        }
-        
-        if (permsToPrompt.length > 0) {
-          handleBadLoginState(permsToPrompt);
-        }
-      });
-    };
+	}	
 
 	function postToFacebook(url, params, onSuccess, onError){
 		console.log('Post to ' + url);
@@ -65,7 +80,7 @@ window.Facebook = (function () {
 	        'post',
 	        params,
 	        function(response) {
-	            if (response.id != null) {
+	            if (response.id != null || response === true) {
 	                onSuccess(response.id);
 	            }
 	            if (response.error != null) {
@@ -95,6 +110,20 @@ window.Facebook = (function () {
 		};
 
 		postToFacebook(eventId + '/feed', params, onSuccess, onError);
+	}
+
+	facebookConstructor.prototype.inviteFriends = function(eventId, friendIds, onSuccess, onError){		
+		postToFacebook(eventId + '/invited?users=' + friendIds.join(','), {}, onSuccess, onError);
+	}
+
+	facebookConstructor.prototype.getUsername = function(onSuccess, onError){
+		FB.api('/me', function(response){
+			if (typeof response != 'undefined' && typeof response.name != undefined){
+				onSuccess.call(this, response);
+			} else {
+				onError.call(this);
+			}
+		});
 	}
 
 	return facebookConstructor;

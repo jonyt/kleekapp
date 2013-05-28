@@ -25,7 +25,11 @@
 		        dataType: 'jsonp',
 		        data: params,
 		        success : function(data) {
-		            collection.reset(data.businesses);
+		        	var businesses = $.map(data.businesses, function(business, index){
+		        		business.category = category;
+		        		return business;
+		        	});
+		            collection.reset(businesses);
 		        }
 		    });	
 	    }
