@@ -128,19 +128,7 @@ body {
 	line-height: 1;
 	color: black;
 	}
-
-/* We don't want any flyer displayed before the first one. (P.S. A :not selector might have been nice if there was one before CSS3) */
-#flyer2 {
-    display : none;
-}
-#flyer3 {
-    display : none;
-}
-#flyer4 {
-    display : none;
-}
-	
-	
+		
 /* FLYER 1 */
 
 #flyer1.flyerwrapper {

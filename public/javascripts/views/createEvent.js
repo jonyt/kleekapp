@@ -38,15 +38,15 @@
 					var dateString = view.$('#datepicker').val(),
 						timeString = view.$('#select2').val(),
 						eventDate  = new Date(Date.parse(dateString + " " + timeString));
-					view.model.set('start_time', eventDate.toISOString());
+					view.model.set('start_time', eventDate.toISOString());					
 					
 					view.model.save({}, {success: function(){
-						console.log('success');
-						new App.Views.FlyerContainer({el: $('#page4'), model: view.model});
+						console.log('success');						
 						//TODO: report to ga
 					}});
 					App.vent.trigger('page:transition', 3);
-
+					new App.Views.FlyerContainer({el: $('#page4'), model: view.model});
+						
 					return false;
 				}
 		    });

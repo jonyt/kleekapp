@@ -109,7 +109,7 @@ window.Facebook = (function () {
 			picture: picture
 		};
 
-		postToFacebook(eventId + '/feed', params, onSuccess, onError);
+		postToFacebook('/' + eventId + '/feed', params, onSuccess, onError);
 	}
 
 	facebookConstructor.prototype.inviteFriends = function(eventId, friendIds, onSuccess, onError){		
@@ -123,6 +123,22 @@ window.Facebook = (function () {
 			} else {
 				onError.call(this);
 			}
+		});
+	}
+
+	facebookConstructor.prototype.inviteFriendsToApp = function(){
+		FB.ui({ 
+			method: 'apprequests', 
+			title: 'If you like Kleek, please invite your friends.',
+			message: 'Kleek is free to use, we would really appreciate it if you could invite your friends.',
+			filters: ['app_non_users']
+		}, function(response){
+			if (response == null){
+				// report to GA, dialog cancelled
+			} else {
+				// report to GA, response.to.join() is a comma separated string of invitee IDs
+				console.log(response.to.join());
+			}			
 		});
 	}
 

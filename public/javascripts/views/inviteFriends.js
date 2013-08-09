@@ -23,6 +23,9 @@
 						}
 					});
 				}
+			},
+			'click #skip_invite_friends_button': function(){
+				App.vent.trigger('page:transition', 4);
 			}
 		}
 	});

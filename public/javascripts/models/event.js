@@ -38,9 +38,14 @@
                                 var bitly = new Bitly(),
                                     mapIcon = 'http://icons.iconarchive.com/icons/double-j-design/apple-festival/72/app-map-icon.png';    
                                 bitly.shorten(mapUrl, function(shortUrl){
-                                        Facebook.postLink(eventId, 'How to get there', shortUrl, function(){}, function(error){
+                                        Facebook.postLink(eventId, 
+                                            'How to get there', 
+                                            shortUrl, 
+                                            mapIcon,
+                                            function(){}, 
+                                            function(error){
                                                 console.log(error);
-                                        })
+                                            })
                                 });                                        
                             };
 
