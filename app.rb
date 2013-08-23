@@ -33,6 +33,12 @@ class App < Sinatra::Base
   # used by Canvas apps - redirect the POST to be a regular GET
   post "/" do
     puts "%%%%%%%%%% #{params.inspect}"
+    signed_request = params['signed_request']
+    parsed_request = authenticator.parse_signed_request(signed_request)
+    puts parsed_request.inspect
+    graph = Koala::Facebook::API.new(parsed_request['oauth_token'])
+    puts graph.get_connections('me','permissions').inspect
+    
     redirect "/"
   end
 
