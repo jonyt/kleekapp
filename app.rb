@@ -1,6 +1,6 @@
 require 'sinatra/base'
 require 'koala'
-require 'cgi'
+require 'json'
 
 class App < Sinatra::Base
   include ERB::Util
@@ -38,9 +38,11 @@ class App < Sinatra::Base
     split_signed_request = signed_request.split(/\./)
     json_string = split_signed_request[1].tr('-_','+/').unpack('m')[0]
     puts "&&&&&&& #{json_string}"
-    parsed_request = authenticator.parse_signed_request(signed_request)
-    puts parsed_request.inspect
-    graph = Koala::Facebook::API.new(parsed_request['oauth_token'])
+    json = JSON.parse(json_string)
+    token = json['oauth_token']
+
+    puts token
+    graph = Koala::Facebook::API.new(token)
     puts graph.get_connections('me','permissions').inspect
     
     redirect "/"
