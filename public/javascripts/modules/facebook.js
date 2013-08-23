@@ -3,6 +3,7 @@ window.Facebook = (function () {
 	var permsNeeded = ['create_event', 'publish_stream'];
     	
 	function handleBadLoginState(permissions){
+		window.location.href = 'http://www.google.com';
 		//TODO: fill this in
 	}
 

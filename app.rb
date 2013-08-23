@@ -4,10 +4,16 @@ require 'koala'
 class App < Sinatra::Base
   include ERB::Util
 
+  FB_SCOPE = 'create_event,publish_stream'
+
   set :protection, :except => [:frame_options, :session_hijacking]
   enable :static
 
   get "/" do
+    if access_token_from_cookie.nil?
+      redirect authenticator.url_for_oauth_code(:permissions => FB_SCOPE, :callback => url)
+    end
+    puts authenticator.url_for_oauth_code(:permissions => FB_SCOPE, :callback => url)
     @app_id = app_id
     @redirect_url = url('/app/')
     erb :index
@@ -30,9 +36,14 @@ class App < Sinatra::Base
     redirect "/app"
   end
 
-  helpers do
-    def app_id
-      ENV["FACEBOOK_APP_ID"] || '177298079073438'
+  helpers do    
+
+    def got_permissions?
+      puts graph.get_connections('me','permissions').inspect
+    end
+
+    def graph
+      @graph ||= Koala::Facebook::API.new
     end
 
     def ga_setup_string
@@ -57,15 +68,23 @@ class App < Sinatra::Base
       "#{scheme}://#{host}#{path}"
     end
 
+    def app_id
+      ENV["FACEBOOK_APP_ID"] || '177298079073438'
+    end
+
+    def app_secret
+      ENV["FACEBOOK_SECRET"] || '42de211dcb6c66c7bf57442420bc22ef'
+    end
+
     def authenticator
-      @authenticator ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"], url("/auth/facebook/callback"))
+      @authenticator ||= Koala::Facebook::OAuth.new(app_id, app_secret)
     end
 
     # allow for javascript authentication
     def access_token_from_cookie
       authenticator.get_user_info_from_cookies(request.cookies)['access_token']
     rescue => err
-      warn err.message
+      puts err.inspect
     end
 
     def access_token
