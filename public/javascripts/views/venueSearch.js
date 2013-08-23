@@ -28,6 +28,7 @@
 		},
 		events: {
 			'click #venueSearchButton': function(e){
+				ga('send', 'event', 'interaction', 'venue-search', '', App.elapsedTime());					
 				this.resetCollection(this);
 			},
 			'keydown #search': function(e){

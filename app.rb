@@ -8,8 +8,8 @@ class App < Sinatra::Base
   enable :static
 
   get "/" do
-    @app_id = ENV["FACEBOOK_APP_ID"] || '177298079073438'
-
+    @app_id = app_id
+    @redirect_url = url('/app/')
     erb :index
   end
 
@@ -18,7 +18,29 @@ class App < Sinatra::Base
     redirect "/"
   end
 
+  get "/app/" do
+    @app_id = app_id
+    @ga_setup_string = ga_setup_string
+
+    erb :app
+  end
+
+  # used by Canvas apps - redirect the POST to be a regular GET
+  post "/app/" do
+    redirect "/app"
+  end
+
   helpers do
+    def app_id
+      ENV["FACEBOOK_APP_ID"] || '177298079073438'
+    end
+
+    def ga_setup_string
+      ga_id = ENV["GA_ID"] || 'UA-43442670-1'
+      ga_host = (host.match(/localhost/) ? "{'cookieDomain': 'none'}" : 'kleekapp.com')
+      "ga('create', '#{ga_id}', #{ga_host});"
+    end
+
     def host
       request.env['HTTP_HOST']
     end

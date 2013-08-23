@@ -12,19 +12,23 @@
 
 	window.App = {
 		vent: vent,
+		startTime: new Date().getTime(),
+		elapsedTime: function(){
+			return new Date().getTime() - this.startTime;
+		},
 		Models: {},
 		Collections: {},
 		Views: {},
 		MarkerIcons: {
-			bars: new google.maps.MarkerImage("images/marker_icons/bar.png"),
-	        coffee: new google.maps.MarkerImage("images/marker_icons/coffee.png"),
-	        danceclubs: new google.maps.MarkerImage("images/marker_icons/dancinghall.png"),
-	        movietheaters: new google.maps.MarkerImage("images/marker_icons/cinema.png"),
-	        museums: new google.maps.MarkerImage("images/marker_icons/museum.png"),
-	        parks: new google.maps.MarkerImage("images/marker_icons/park.png"),
-	        poolhalls: new google.maps.MarkerImage("images/marker_icons/billiard-2.png"),
-	        restaurants: new google.maps.MarkerImage("images/marker_icons/restaurant.png"),
-	        shopping: new google.maps.MarkerImage("images/marker_icons/shopping.png")
+			bars: new google.maps.MarkerImage("/images/marker_icons/bar.png"),
+	        coffee: new google.maps.MarkerImage("/images/marker_icons/coffee.png"),
+	        danceclubs: new google.maps.MarkerImage("/images/marker_icons/dancinghall.png"),
+	        movietheaters: new google.maps.MarkerImage("/images/marker_icons/cinema.png"),
+	        museums: new google.maps.MarkerImage("/images/marker_icons/museum.png"),
+	        parks: new google.maps.MarkerImage("/images/marker_icons/park.png"),
+	        poolhalls: new google.maps.MarkerImage("/images/marker_icons/billiard-2.png"),
+	        restaurants: new google.maps.MarkerImage("/images/marker_icons/restaurant.png"),
+	        shopping: new google.maps.MarkerImage("/images/marker_icons/shopping.png")
 		}
 	};
 

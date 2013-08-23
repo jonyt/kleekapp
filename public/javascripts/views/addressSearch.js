@@ -6,6 +6,7 @@
 		},
 		events: {
 			'submit': function(){
+				ga('send', 'event', 'interaction', 'address-search', 'click', App.elapsedTime());
 				var view = this,
 					addressField = this.$('#search'),
 					address = addressField.val();
@@ -20,8 +21,10 @@
 			        'address': address
 			    }, function(results, status) {		
 			        if (status == google.maps.GeocoderStatus.OK) {
+			        	ga('send', 'event', 'interaction', 'address-search', 'success', App.elapsedTime());
 			        	App.vent.trigger('map:changeLocation', results[0].geometry.location);
 			        } else {
+			        	ga('send', 'event', 'interaction', 'address-search', 'error', App.elapsedTime());
 						/*$('#map-loading').fadeOut();
 						$().toastmessage('showToast', {
 							text     : "Couldn't find this address, please try again",

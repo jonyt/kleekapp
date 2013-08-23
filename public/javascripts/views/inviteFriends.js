@@ -13,6 +13,8 @@
 		},
 		events: {
 			'click #invite_friends_button': function(){
+				ga('send', 'event', 'interaction', 'invite-friends', '', App.elapsedTime());					
+
 				var friendIds = this.friendSelector.getSelectedIds();
 				if (friendIds === undefined || friendIds.length === 0){
 					//TODO: error message
@@ -25,6 +27,8 @@
 				}
 			},
 			'click #skip_invite_friends_button': function(){
+				ga('send', 'event', 'interaction', 'skip-invite-friends', '', App.elapsedTime());					
+
 				App.vent.trigger('page:transition', 4);
 			}
 		}

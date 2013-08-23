@@ -8,6 +8,8 @@
 		},
 		events: {
 			'click .result_button': function(e){
+				ga('send', 'event', 'interaction', 'venue-select', '', App.elapsedTime());					
+
 				App.vent.trigger('page:transition', 2);
 				// Delete id key from attributes so that model isNew will be false
 				var eventModel = new App.Models.Event(this.model.omit('id')); 

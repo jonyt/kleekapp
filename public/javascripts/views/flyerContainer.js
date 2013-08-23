@@ -39,6 +39,9 @@
 					template = $('#flyer' + (index + 1) + '-template'),
 					timeFormatCallback,
 					dateFormatCallback = this.dateFormatCallbacks[index];
+
+				ga('send', 'event', 'interaction', 'flyer-thumbnail-select', '' + index, App.elapsedTime());						
+					
 				switch(index){
 				case 0:
 				case 1:
@@ -67,6 +70,8 @@
 				this.flyerContainer.html(flyerView.render());
 			},
 			'click .chooseflyer': function(e){
+				ga('send', 'event', 'interaction', 'flyer-select', '', App.elapsedTime());					
+
 				this.$('.flyertext').fadeOut();
 				this.$('.flyerholder').fadeOut();
 				$(e.target).fadeOut();

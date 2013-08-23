@@ -30,7 +30,9 @@
 		        errorPlacement: function(error, element) {
 		            error.insertAfter(element);
 		        },
-				submitHandler : function() {					
+				submitHandler : function() {
+					ga('send', 'event', 'interaction', 'event-create', 'submit', App.elapsedTime());
+										
 					view.model.set('eventName', view.$('#event_title').val());
 					view.model.set('description', view.$('#event_description').val());
 					view.model.set('privacy_type', view.$('input[name="privacy"]:checked').val());
@@ -41,8 +43,7 @@
 					view.model.set('start_time', eventDate.toISOString());					
 					
 					view.model.save({}, {success: function(){
-						console.log('success');						
-						//TODO: report to ga
+						ga('send', 'event', 'interaction', 'event-create', 'success', App.elapsedTime());					
 					}});
 					App.vent.trigger('page:transition', 3);
 					new App.Views.FlyerContainer({el: $('#page4'), model: view.model});
