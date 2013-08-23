@@ -34,6 +34,7 @@ class App < Sinatra::Base
   post "/" do
     puts "%%%%%%%%%% #{params.inspect}"
     signed_request = params['signed_request']
+    puts "$$$$$$$$ #{signed_request.inspect}"
     parsed_request = authenticator.parse_signed_request(signed_request)
     puts parsed_request.inspect
     graph = Koala::Facebook::API.new(parsed_request['oauth_token'])
