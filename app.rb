@@ -32,26 +32,26 @@ class App < Sinatra::Base
 
   # used by Canvas apps - redirect the POST to be a regular GET
   post "/" do
-    puts "%%%%%%%%%% #{params.inspect}"
-    signed_request = params['signed_request']
-    puts "$$$$$$$$ #{signed_request.inspect}"
-    split_signed_request = signed_request.split(/\./)
-    json_string = split_signed_request[1].tr('-_','+/').unpack('m')[0]
-    puts "&&&&&&& #{json_string}"
+    signed_request = params['signed_request']    
     token = ''
     begin
-      json = JSON.parse(json_string)
-      token = json['oauth_token']  
-      puts "FIRST ATTEMPT"
+      parsed_request = authenticator.parse_signed_request(signed_request)
+      token = parsed_request['oauth_token']      
     rescue 
-      token = json_string.scan(/\"oauth_token\":\"(.+?)\"/)[0][0]
-      puts "SECOND ATTEMPT"
+      begin
+        split_signed_request = signed_request.split(/\./)
+        json_string = split_signed_request[1].tr('-_','+/').unpack('m')[0]
+        json = JSON.parse(json_string)
+        token = json['oauth_token']    
+      rescue 
+        token = json_string.scan(/\"oauth_token\":\"(.+?)\"/)[0][0]  
+      end
     end
     
-    puts token
     graph = Koala::Facebook::API.new(token)
     puts graph.get_connections('me','permissions').inspect
-    
+    # REPLY: [{"installed"=>1, "basic_info"=>1, "status_update"=>1, "photo_upload"=>1, "video_upload"=>1, "create_event"=>1, "create_note"=>1, "share_item"=>1, "publish_stream"=>1, "publish_actions"=>1, "bookmarked"=>1}]
+    # TODO: verify all permissions OK, if not render index.erb (with message?), if yes render app.erb
     redirect "/"
   end
 
