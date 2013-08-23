@@ -38,9 +38,16 @@ class App < Sinatra::Base
     split_signed_request = signed_request.split(/\./)
     json_string = split_signed_request[1].tr('-_','+/').unpack('m')[0]
     puts "&&&&&&& #{json_string}"
-    json = JSON.parse(json_string)
-    token = json['oauth_token']
-
+    token = ''
+    begin
+      json = JSON.parse(json_string)
+      token = json['oauth_token']  
+      puts "FIRST ATTEMPT"
+    rescue 
+      token = json_string.scan(/\"oauth_token\":\"(.+?)\"/)[0][0]
+      puts "SECOND ATTEMPT"
+    end
+    
     puts token
     graph = Koala::Facebook::API.new(token)
     puts graph.get_connections('me','permissions').inspect
