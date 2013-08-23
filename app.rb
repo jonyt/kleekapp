@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'koala'
+require 'cgi'
 
 class App < Sinatra::Base
   include ERB::Util
@@ -10,10 +11,20 @@ class App < Sinatra::Base
   enable :static
 
   get "/" do
-    if access_token_from_cookie.nil?                
-      redirect authenticator.url_for_oauth_code(:permissions => FB_SCOPE, :callback => url)
+    puts "********** PARAMS #{params.inspect}"
+    if params.has_key?('code')
+      puts "GOT ITTTTTTTTTT"
+      token = authenticator.get_access_token(params['code'])
+      puts "^^^^ TOKEN #{token.inspect}"
+    else
+      puts "REDIRECTTTTTTTTTTT"
+      redirect authenticator.url_for_oauth_code(:permissions => FB_SCOPE)
     end
-    puts authenticator.url_for_oauth_code(:permissions => FB_SCOPE, :callback => url)
+    # if access_token_from_cookie.nil? 
+    #   puts "()()))))))))))))((((((((((( #{CGI.escape(url('/'))}"               
+    #   redirect authenticator.url_for_oauth_code(:permissions => FB_SCOPE)
+    # end
+    # puts authenticator.url_for_oauth_code(:permissions => FB_SCOPE, :callback => url)
     @app_id = app_id
     @redirect_url = url('/app/')
     erb :index
@@ -77,7 +88,7 @@ class App < Sinatra::Base
     end
 
     def authenticator
-      @authenticator ||= Koala::Facebook::OAuth.new(app_id, app_secret)
+      @authenticator ||= Koala::Facebook::OAuth.new(app_id, app_secret, 'http://localhost:9292/')
     end
 
     # allow for javascript authentication
