@@ -10,7 +10,7 @@ class App < Sinatra::Base
   enable :static
 
   get "/" do
-    if access_token_from_cookie.nil?
+    if access_token_from_cookie.nil?                
       redirect authenticator.url_for_oauth_code(:permissions => FB_SCOPE, :callback => url)
     end
     puts authenticator.url_for_oauth_code(:permissions => FB_SCOPE, :callback => url)
@@ -82,6 +82,9 @@ class App < Sinatra::Base
 
     # allow for javascript authentication
     def access_token_from_cookie
+      puts "!!!!!!!! AUTHENTICATOR #{authenticator.inspect}"
+      puts "$$$$$$$$ COOKIES       #{request.cookies.inspect}"
+      puts "@@@@@@@@ INFO          #{authenticator.get_user_info_from_cookies(request.cookies).inspect}"
       authenticator.get_user_info_from_cookies(request.cookies)['access_token']
     rescue => err
       puts err.inspect
