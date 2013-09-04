@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+   <head>
+   
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   
+	  <meta property="og:title" content="Kleek" />
+      <meta property="fb:app_id" content="155781191112436" />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="http://www.kleekapp.com" />
+      <meta property="og:image" content="http://www.kleekapp.com/images/logo.png" />
+      <meta property="og:site_name" content="Kleek" />
+      <meta property="og:description" content="Kleek is a Facebook app that lets you find new places in town and create events for your friends." />
+	  
+      <title>Kleek</title>
+	  
+      <link href="/css/outside_pages.css" rel="stylesheet" type="text/css" />
+           
+   </head>
+   <body style="background: url(images/bg_abstract.jpg) no-repeat scroll center 0 transparent; margin:0px; padding:0px;">
+      <div class="pagecontainer">
+         <div class="headercontainer">
+            <div class="logo"><a href="http://www.kleekapp.com/"><img alt="Kleek Logo" src="/images/logo.png" /></a></div>
+            <div class="headerbuttons">
+               <div class="fb-like" data-href="http://www.kleekapp.com" data-send="false" data-layout="button_count" data-width="100" data-show-faces="true"></div>
+               <div id="twitter-container">
+                  <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.kleekapp.com" data-count="none">Tweet</a> 
+                  <script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
+               </div>
+            </div>
+         </div>
+         <!-- closing DIV for headercontainer -->
+         <div id="maincontainer"> 
+           <div class="background-1"></div>   
+                 <div class="background-2">
+                    <div class="text_content">
+                      <div class="not_found"><img src="/images/500.jpg" width="776" height="497" alt="404 not found"></div>
+                  <div class="takemehome"><a href="http://apps.facebook.com/kleekapp/"><img alt="" src="/images/button_take_me_home.png" /></a></div>
+                    </div>
+        
+               </div>
+   <div class="background-3"></div> 
+
+   
+      </div>
+               <!-- closing DIV for maincontainer -->
+            <div class="footercontainer">
+            <div class="footercontent">
+               <div class="footerleft">copyright 2011 kleek</div>
+          <div class="footerright margin"><a class="footerright" href="contact.html" id="contact">Contact</a></div>
+               <div class="footerright"><a class="footerright" href="privacy.html" id="privacy">Privacy Policy</a></div>
+               <div class="footerright"><a class="footerright" href="about.html" id="about">About</a></div>
+            </div>
+         </div>
+         <!-- closing DIV for footercontainer -->
+      <!-- closing DIV for pagecontainer -->
+      
+      <div id="fb-root"></div>
+      <script>
+         window.fbAsyncInit = function() {
+			/*FB.XFBML._getDomElements = function(a,b,c) {
+			  return a.getElementsByTagNameNS('http://www.facebook.com/2008/fbml', c);
+			}*/
+           FB.init({
+             appId      : '273113692748326', // App ID    
+             status     : true, // check login status
+             cookie     : true, // enable cookies to allow the server to access the session
+             oauth      : true, // enable OAuth 2.0
+             xfbml      : true  // parse XFBML
+           });
+           FB.getLoginStatus(function(response) {
+         if (response.authResponse) {				
+         	var query1 = FB.Data.query('select first_name, name from user where uid={0}', response.authResponse.userID);
+         	query1.wait(function(rows) {
+         		$('.leadintext').html($('<p />').text(rows[0].first_name + ' invites you to'));
+         		$('div#flyer4 > div.leadintext').html($('<p />').text(rows[0].name + ' presents'));
+         	});
+         	var query = FB.Data.query('select publish_stream, create_event, user_about_me from permissions where uid={0}', response.authResponse.userID);
+         	query.wait(function(rows) {
+         		if (rows[0].publish_stream == 1 && rows[0].create_event == 1) {
+         			//console.log("ok");
+         		} else {
+         			window.top.location = window.location.protocol + '//www.kleekapp.com/authorize.html';
+         		}
+         	});
+         } else {
+         	window.top.location = window.location.protocol + '//www.kleekapp.com/authorize.html';
+         }
+         });
+         };
+         
+         // Load the SDK Asynchronously
+         (function(d){
+            var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+            js = d.createElement('script'); js.id = id; js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+          }(document));
+      </script>
+      <script type="text/javascript">
+
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-26979867-1']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+
+     </script>
+   </body>
+</html>

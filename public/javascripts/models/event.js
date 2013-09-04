@@ -6,6 +6,7 @@
             var model = this;
             Facebook.getUsername(function(response){
                 model.set('userFirstName', response.first_name);
+                model.set('username', response.name);
             }, function(){
                 //TODO: report and throw error
             });
@@ -18,33 +19,34 @@
                                 App.vent.trigger('event:created', model);;
 
                                 var category = model.get('category'),
-                                    startTime = new Date(model.get('start_time')),    
+                                    startTime = new Date(model.get('start_time')),
+                                    venue = model.get('name'),    
                                     encodedParams = $.param({
                                         title: model.get('name'),
                                         latitude: model.get('latitude'),
                                         longitude: model.get('longitude'),
                                         icon: window.location.host + App.MarkerIcons[category].url,
                                         address: address,
-                                        year: startTime.getUTCFullYear(),
-                                        month: startTime.getUTCMonth(),
-                                        day: startTime.getUTCDate(),
-                                        hour: startTime.getUTCHours(),
-                                        minute: startTime.getUTCMinutes()           
+                                        start_time: model.get('start_time'),           
                                     }),     
-                                    mapUrl = "http://www.kleekapp.com" + "/map?" + encodedParams;
-                                //TODO: change to window.location.href
+                                    mapUrl = (window.location.host.indexOf('localhost') > -1 ?
+                                        "http://stormy-sands-3246.herokuapp.com/?" + encodedParams:
+                                        'http://' + window.location.host + "/map?" + encodedParams
+                                        );                                
                                     
                                 //TODO: load picture from kleekapp.com
                                 var bitly = new Bitly(),
                                     mapIcon = 'http://icons.iconarchive.com/icons/double-j-design/apple-festival/72/app-map-icon.png';    
                                 bitly.shorten(mapUrl, function(shortUrl){
                                         Facebook.postLink(eventId, 
-                                            'How to get there', 
+                                            "Here's how to get to " + venue, 
                                             shortUrl, 
                                             mapIcon,
-                                            function(){}, 
+                                            function(){
+                                                ga('send', 'event', 'success', 'fb-post-map', '', App.elapsedTime());
+                                            }, 
                                             function(error){
-                                                console.log(error);
+                                                ga('send', 'event', 'error', 'fb-post-map', '', App.elapsedTime());
                                             })
                                 });                                        
                             };

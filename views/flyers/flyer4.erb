@@ -1,0 +1,23 @@
+<link href="css/flyers.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+    window.onload = function() {
+        var eventDate = new Date(<%= @time.to_i * 1000 %>);
+        document.querySelector('.eventdate > p').innerHTML = eventDate.toString('MMM') + '<span>' + eventDate.toString('d') + '</span><p>' + eventDate.toString('ddd') + '</p>';
+        document.querySelector('.eventtime > p').innerHTML = eventDate.toString('h:mm');        
+        document.querySelector('.eventtime > span').innerHTML = eventDate.toString('tt');        
+    }
+</script>
+
+<div class="flyer_content">
+    <div class="mainflyer">
+        <div class="flyerwrapper" id="flyer4">
+            <div class="leadintext"><p><%= @name %> presents</p></div>
+            <div class="eventtitle_container"><div class="eventtitle"><div><div><p><%= @title %></p></div></div></div></div>
+            <div class="eventtime"><p></p> <span></span></div>
+            <div class="eventdate"><p><span></span><p></p></p></div>
+            <div class="eventplace_container"><div class="eventplace"><div><div><p><%= @venue %></p></div></div></div></div>
+            <div class="eventaddress"><p><%= @address %></p></div>
+        </div>
+    </div>
+</div>

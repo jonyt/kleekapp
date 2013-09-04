@@ -19,16 +19,8 @@ function DivOverlay(text, map, position) {
 DivOverlay.prototype = new google.maps.OverlayView();
 
 DivOverlay.prototype.onAdd = function() {
-
-  // Note: an overlay's receipt of onAdd() indicates that
-  // the map's panes are now available for attaching
-  // the overlay to the map via the DOM.
-
-  // We add an overlay to a map via one of the map's panes.
-  // We'll add this overlay to the overlayImage pane.
   var panes = this.getPanes();
-  panes.overlayLayer.style['zIndex'] = 1000;
-  panes.overlayLayer.appendChild(this.div_);
+  panes.floatPane.appendChild(this.div_);
 }
 
 DivOverlay.prototype.draw = function() {

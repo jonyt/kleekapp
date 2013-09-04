@@ -1,33 +1,31 @@
 require 'sinatra/base'
 require 'koala'
 require 'json'
+require 'time'
 
 class App < Sinatra::Base
   include ERB::Util
 
   FB_SCOPE = 'create_event,publish_stream'
+  
+  MAP_WIDTH  = 597
+  MAP_HEIGHT = 419
+  
+  map_param_names   = ['title', 'address', 'icon', 'latitude', 'longitude', 'start_time'].freeze
+  flyer_param_names = ['title', 'address', 'flyer', 'username', 'userFirstName', 'start_time'].freeze
 
   set :protection, :except => [:frame_options, :session_hijacking]
   enable :static
 
   get "/" do
-    puts "********** PARAMS #{params.inspect}"
-    if params.has_key?('code')
-      puts "GOT ITTTTTTTTTT"
-      token = authenticator.get_access_token(params['code'])
-      puts "^^^^ TOKEN #{token.inspect}"
-    else
-      puts "REDIRECTTTTTTTTTTT"
-      redirect authenticator.url_for_oauth_code(:permissions => FB_SCOPE)
-    end
-    # if access_token_from_cookie.nil? 
-    #   puts "()()))))))))))))((((((((((( #{CGI.escape(url('/'))}"               
-    #   redirect authenticator.url_for_oauth_code(:permissions => FB_SCOPE)
-    # end
-    # puts authenticator.url_for_oauth_code(:permissions => FB_SCOPE, :callback => url)
     @app_id = app_id
-    @redirect_url = url('/app/')
-    erb :index
+    if params.has_key?('code')
+      token = authenticator.get_access_token(params['code'])
+      return (permissions_ok?(token) ? (erb :app) : (erb :index))
+    else
+      @redirect_url = url('/')
+      erb :index
+    end        
   end
 
   # used by Canvas apps - redirect the POST to be a regular GET
@@ -48,38 +46,73 @@ class App < Sinatra::Base
       end
     end
     
-    graph = Koala::Facebook::API.new(token)
-    permissions = graph.get_connections('me','permissions')
-    puts permissions.inspect
-    if !permissions.nil? && permissions.is_a?(Array)
-      puts "1111111"
-      permission_hash = permissions.first
-      puts permission_hash.inspect
-      if permission_hash.size >= 2 && permission_hash.has_key?('create_event') && permission_hash.has_key?('publish_stream')
-        return erb :app
-      end
+    return (permissions_ok?(token) ? (erb :app) : (erb :index))
+  end
+
+  get '/map' do
+    if (!has_all_params?(params, map_param_names))
+        raise Sinatra::NotFound
+    else
+        @map_url = "http://maps.googleapis.com/maps/api/staticmap?size=#{MAP_WIDTH}x#{MAP_HEIGHT}&markers=icon:#{params[:icon]}|#{params[:latitude]},#{params[:longitude]}&sensor=false"
+        @title = params[:title]
+        @address = params[:address]
+        @time = Time.parse(params[:start_time])
+        erb :map, :layout => 'flyers/layout'.to_sym
     end
-    # REPLY: [{"installed"=>1, "basic_info"=>1, "status_update"=>1, "photo_upload"=>1, "video_upload"=>1, "create_event"=>1, "create_note"=>1, "share_item"=>1, "publish_stream"=>1, "publish_actions"=>1, "bookmarked"=>1}]
-    # TODO: verify all permissions OK, if not render index.erb (with message?), if yes render app.erb
-    erb :index
   end
 
-  get "/app/" do
-    @app_id = app_id
+
+  get '/flyer' do
     @ga_setup_string = ga_setup_string
+    if (!has_all_params?(params, flyer_param_names))
+      raise Sinatra::NotFound
+    else
+      flyer_num = params[:flyer_num]
+      @name = params[:username]
+      @first_name = params[:user_first_name]
+      @title = params[:title]
+      @time = Time.parse(params[:start_time])
+      @address = params[:address]
+      @venue = params[:venue]
 
-    erb :app
+      puts "flyers/flyer#{flyer_num}".to_sym
+
+      erb "flyers/flyer#{flyer_num}".to_sym, :layout => 'flyers/layout'.to_sym
+    end
   end
 
-  # used by Canvas apps - redirect the POST to be a regular GET
-  post "/app/" do
-    redirect "/app"
+  not_found do
+    send_file File.join('public', '404.html')
+  end
+
+  error do
+    send_file File.join('public', '500.html')
   end
 
   helpers do    
+    def has_all_params?(params, param_names)
+      param_names.each do |param_name|
+        return false if !params.has_key?(param_name)
+      end
 
-    def got_permissions?
-      puts graph.get_connections('me','permissions').inspect
+      return true
+    end
+
+    def permissions_ok?(token)
+      begin
+        graph = Koala::Facebook::API.new(token)
+        permissions = graph.get_connections('me','permissions')
+        if !permissions.nil? && permissions.is_a?(Array)
+          permission_hash = permissions.first      
+          if permission_hash.size >= 2 && permission_hash.has_key?('create_event') && permission_hash.has_key?('publish_stream')
+            return true
+          end
+        end  
+      rescue Exception => e
+        return false  
+      end
+      
+      return false
     end
 
     def graph
@@ -118,20 +151,6 @@ class App < Sinatra::Base
 
     def authenticator
       @authenticator ||= Koala::Facebook::OAuth.new(app_id, app_secret, 'http://localhost:9292/')
-    end
-
-    # allow for javascript authentication
-    def access_token_from_cookie
-      puts "!!!!!!!! AUTHENTICATOR #{authenticator.inspect}"
-      puts "$$$$$$$$ COOKIES       #{request.cookies.inspect}"
-      puts "@@@@@@@@ INFO          #{authenticator.get_user_info_from_cookies(request.cookies).inspect}"
-      authenticator.get_user_info_from_cookies(request.cookies)['access_token']
-    rescue => err
-      puts err.inspect
-    end
-
-    def access_token
-      session[:access_token] || access_token_from_cookie
     end
 
   end

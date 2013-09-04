@@ -1,0 +1,23 @@
+<script type="text/javascript">
+    window.onload = function() {
+        var eventDate = new Date(<%= @time.to_i * 1000 %>);
+        document.querySelector('#event-date').innerHTML = 
+            eventDate.toString('MMMM d, yyyy') + ', ' + eventDate.toString('h:mmtt');
+    }
+</script>
+
+<div class="container">
+    <div class="row col-md-offset-3">
+        <div class="row">
+            <h1><%= @title %></h1>
+        </div>
+        <div class="row">
+            <img class="well" src="<%= @map_url %>" alt="map" />        
+        </div>
+        <div id="event-date" class="row lead">        
+        </div>
+        <div class="row lead">
+            <%= @address %>
+        </div>
+    </div>    
+</div><!-- /.container -->

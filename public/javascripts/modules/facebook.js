@@ -1,6 +1,6 @@
 window.Facebook = (function () {
 
-	var permsNeeded = ['create_event', 'publish_stream'];
+	/*var permsNeeded = ['create_event', 'publish_stream'];
     	
 	function handleBadLoginState(permissions){
 		window.location.href = 'http://www.google.com';
@@ -36,7 +36,7 @@ window.Facebook = (function () {
 			    }, 20);
         }
       });
-    };
+    };*/
 
 	var facebookConstructor = function Facebook(appId, channelFile){
 		if(false === (this instanceof Facebook)) {
@@ -52,7 +52,7 @@ window.Facebook = (function () {
 	            xfbml      : true                                     // parse XFBML
 	          }); 	      
 
-	      FB.getLoginStatus(function(response) {
+	      /*FB.getLoginStatus(function(response) {
 	        if (response.status === 'connected') {
 	          checkPermissions();
 	        } else if (response.status === 'not_authorized') {
@@ -60,7 +60,7 @@ window.Facebook = (function () {
 	        } else {
 	          handleBadLoginState(permsNeeded);
 	        }
-	      });
+	      });*/
 	      FB.Canvas.setAutoGrow();
 	    };
 
