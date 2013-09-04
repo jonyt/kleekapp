@@ -50,8 +50,11 @@ class App < Sinatra::Base
     
     graph = Koala::Facebook::API.new(token)
     permissions = graph.get_connections('me','permissions')
+    puts permissions.inspect
     if !permissions.nil? && permissions.is_a?(Array)
+      puts "1111111"
       permission_hash = permissions.first
+      puts permission_hash.inspect
       if permission_hash.size >= 2 && permission_hash.has_key?('create_event') && permission_hash.has_key?('publish_stream')
         erb :app
       end
