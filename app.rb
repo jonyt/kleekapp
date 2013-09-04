@@ -56,7 +56,7 @@ class App < Sinatra::Base
       permission_hash = permissions.first
       puts permission_hash.inspect
       if permission_hash.size >= 2 && permission_hash.has_key?('create_event') && permission_hash.has_key?('publish_stream')
-        erb :app
+        return erb :app
       end
     end
     # REPLY: [{"installed"=>1, "basic_info"=>1, "status_update"=>1, "photo_upload"=>1, "video_upload"=>1, "create_event"=>1, "create_note"=>1, "share_item"=>1, "publish_stream"=>1, "publish_actions"=>1, "bookmarked"=>1}]
