@@ -1,6 +1,6 @@
 (function () {
 	var venue = Backbone.View.extend({		
-		initialize: function(options){			
+		initialize: function(options){
 			var markerPosition = new google.maps.LatLng(this.model.get('latitude'), this.model.get('longitude'));		
 			
 			this.marker = new google.maps.Marker({
@@ -11,6 +11,15 @@
 
 			var divOverlay = new DivOverlay(this.model.get('name'), options.map, this.marker.getPosition());
 			divOverlay.hide();
+
+			this.listenTo(this.model, 'listVenueItem:mouseover', function(){
+				divOverlay.show();
+			});
+			this.listenTo(this.model, 'listVenueItem:mouseout', function(){
+				divOverlay.hide();
+			});
+
+			this.listenTo(this.model, 'destroy', this.remove);
 
 			var model = this.model;
 			this.mouseoverListener = google.maps.event.addListener(this.marker, 'mouseover', function() {

@@ -25,6 +25,11 @@
 		        dataType: 'jsonp',
 		        data: params,
 		        success : function(data) {
+		        	$(collection.models).each(function(index, model){
+		        		model.id = null;
+		        		model.destroy();
+		        	});
+
 		        	var businesses = $.map(data.businesses, function(business, index){
 		        		business.category = category;
 		        		return business;

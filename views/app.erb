@@ -21,6 +21,7 @@
   <link href="/css/form.css" rel="stylesheet" type="text/css" />
   <link href="/css/flyers.css" rel="stylesheet" type="text/css" />
   <link href="/css/jquery.facebook.multifriend.select.css" rel="stylesheet" type="text/css" />        
+  <link href="/css/rcarousel.css" rel="stylesheet" type="text/css" />
 
   <style>
     #select1 {
@@ -103,7 +104,9 @@
  <div class="searchresultsmaincontainer">
    <div class="cover1"></div>
    <div class="cover2"></div>
-   <div id="slider"><ul></ul></div>
+   <div id="slider"></div>
+   <span id="prevBtn"><a href="#">Previous</a></span>
+   <span id="nextBtn"><a href="#">Next</a></span>
  </div>
  <div class="searchselect">
    <select id="select1" tabindex="3">
@@ -355,20 +358,20 @@
 </script>
 
 <script type="text/javascript" src="//maps.google.com/maps/api/js?v=3.4&sensor=false"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script> 
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/1.4.3/jquery.scrollTo.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
-<!--script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script-->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script>
 
-<script type="text/javascript" src="/javascripts/lib/backbone.js"></script>
 <script type="text/javascript" src="/javascripts/lib/jquery.yaselect.min.js"></script>
 <script type="text/javascript" src="/javascripts/lib/jquery.yaselect2.min.js"></script>
 <script type="text/javascript" src="/javascripts/lib/divoverlay.js"></script>
 <script type="text/javascript" src="/javascripts/lib/jquery.dotdotdot-1.3.0-packed.js"></script>
 <script type="text/javascript" src="/javascripts/lib/easySlider1.7.js"></script>
 <script type="text/javascript" src="/javascripts/lib/jquery.facebook.multifriend.select.js"></script>
+<script type="text/javascript" src="/javascripts/lib/jquery.ui.rcarousel.js"></script>
 
 <script type="text/javascript" src="/javascripts/modules/bitly.js"></script>
 
@@ -377,6 +380,8 @@
 <script type="text/javascript" src="/javascripts/models/venue.js"></script>
 <script type="text/javascript" src="/javascripts/models/event.js"></script>
 <script type="text/javascript" src="/javascripts/collections/venues.js"></script>
+<script type="text/javascript" src="/javascripts/views/venueCarousel.js"></script>
+<script type="text/javascript" src="/javascripts/views/carouselContainer.js"></script>
 <script type="text/javascript" src="/javascripts/views/venueMarker.js"></script>
 <script type="text/javascript" src="/javascripts/views/venueList.js"></script>
 <script type="text/javascript" src="/javascripts/views/venueListFrame.js"></script>

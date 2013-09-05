@@ -13,9 +13,10 @@
 			this.venueType = this.$('#select1');
 			this.venueType.yaselect();
 			this.venueType.css('visibility', 'visible');
-			this.markers = [];
+			this.markers = [];			
 
 			var view = this;
+			
 			google.maps.event.addListenerOnce(this.map, 'tilesloaded', function(){				
 				view.resetCollection(view);
 		    });
@@ -43,10 +44,7 @@
 			}
 		},
 		render: function(){
-			var view = this;
-			$(this.markers).each(function(index, markerView){
-				markerView.remove();
-			});
+			var view = this;			
 			$(this.collection.models).each(function(index, venue){				
 			    view.markers.push(new App.Views.VenueMarker({
 			    	model: venue, 
@@ -58,7 +56,10 @@
 			App.vent.trigger('map:rendered');		
 		},
 		resetCollection: function(view){
-			view.collection.fetch({mapBounds: view.map.getBounds(), category: view.venueType.val()});
+			view.collection.fetch({
+				mapBounds: view.map.getBounds(), 
+				category: view.venueType.val()
+			});
 		}
 	});
 

@@ -35,7 +35,8 @@
 	$(document).ready(function(){
 		var venueCollection = new App.Collections.Venues();
 		new App.Views.VenueSearch({el: $('#content1'), collection: venueCollection});	
-		new App.Views.VenueList({el: $('#slider ul'), collection: venueCollection});
+		new App.Views.CarouselContainer({el: $('.searchresultsmaincontainer'), collection: venueCollection});
+		//new App.Views.VenueList({el: $('#slider ul'), collection: venueCollection});
 		new App.Views.SearchLoading({el: $('#map-loading img'), collection: venueCollection});	
 		new App.Views.AddressSearch({el: $('#addressForm')});	
 		new App.Views.PageController({el: $('#maincontainer')});

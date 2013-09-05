@@ -15,14 +15,12 @@
 				var eventModel = new App.Models.Event(this.model.omit('id')); 
 				new App.Views.CreateEvent({model: eventModel, el: $('#eventForm')})
 			},
-			'mouseover result_light': function(e){
-				var $target = $(e.target);
-				if (!$target.prop("tagName") == 'div' || !$target.hasClass('result_light')){
-					$target = $target.parents('.result_light');
-				}
-				var index = $('.result_light').index($target);
-				App.vent.trigger('listVenueItem:mouseover', index);
-			}
+			'mouseover': function(e){
+				this.model.trigger('listVenueItem:mouseover');
+			},
+			'mouseout': function(e){
+				this.model.trigger('listVenueItem:mouseout');
+			}			
 		},
 		render: function(){
 			var html = this.template({venue: this.model});

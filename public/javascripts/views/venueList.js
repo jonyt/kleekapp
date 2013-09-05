@@ -12,7 +12,8 @@
 			});
 		},	
 		render: function(){
-			this.$el.empty();
+			this.$el.empty(); // This is needed to remove the extra elements that are there because
+							  // the carousel is continuous
 			for (var i = 0; i < this.collection.models.length; i+= this.numItemsPerLI){
 				var from = i,
 					to = i + this.numItemsPerLI,
