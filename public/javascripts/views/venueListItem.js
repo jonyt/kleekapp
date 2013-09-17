@@ -5,6 +5,9 @@
 		template: _.template($('#venue-listitem-template').html()),		
 		initialize: function(){
 			this.listenTo(this.model, 'destroy', this.remove);
+			this.listenTo(this.model, 'marker:mouseover', function(){
+				App.vent.trigger('carousel:scrollTo', this.$el);
+			});
 		},
 		events: {
 			'click .result_button': function(e){

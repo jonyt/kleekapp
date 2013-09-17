@@ -61,6 +61,21 @@ window.Facebook = (function () {
 	          handleBadLoginState(permsNeeded);
 	        }
 	      });*/
+		  var counter = 0,
+	      	    timer = setInterval(function(){
+	      	    	console.log(counter);
+	      	    	console.log(App);
+			      	if (typeof App != 'undefined' && typeof App.vent != 'undefined' ){
+			      		console.log('counter');
+			      		clearInterval(timer);
+			      		App.vent.trigger('facebook:initialized');           
+			      	} else if (counter > 1000){
+			      		clearInterval(timer);
+			      		// TODO: notify ga
+			        } else {
+			      		counter++;
+			      	}
+			    }, 20);	
 	      FB.Canvas.setAutoGrow();
 	    };
 

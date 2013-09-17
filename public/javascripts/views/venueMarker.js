@@ -25,7 +25,7 @@
 			this.mouseoverListener = google.maps.event.addListener(this.marker, 'mouseover', function() {
 			    this.timer = setTimeout(function(){
 			        divOverlay.show();
-			        App.vent.trigger('marker:mouseover', model);
+			        model.trigger('marker:mouseover', model);
 				}, 150);
 			});
 			this.mouseoutListener = google.maps.event.addListener(this.marker, 'mouseout', function() {

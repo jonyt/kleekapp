@@ -32,19 +32,23 @@
 		}
 	};
 
+	App.vent.on('facebook:initialized', function(){
+		$(document).ready(function(){
+			console.log('init fb');
+			new App.Views.InviteFriends({el: $('#page3')});
+		});		
+	});
+
 	$(document).ready(function(){
 		var venueCollection = new App.Collections.Venues();
 		new App.Views.VenueSearch({el: $('#content1'), collection: venueCollection});	
-		new App.Views.CarouselContainer({el: $('.searchresultsmaincontainer'), collection: venueCollection});
+		new App.Views.Carousel({el: $('.rs-carousel'), collection: venueCollection});
+		//new App.Views.CarouselContainer({el: $('.searchresultsmaincontainer'), collection: venueCollection});
 		//new App.Views.VenueList({el: $('#slider ul'), collection: venueCollection});
 		new App.Views.SearchLoading({el: $('#map-loading img'), collection: venueCollection});	
 		new App.Views.AddressSearch({el: $('#addressForm')});	
 		new App.Views.PageController({el: $('#maincontainer')});
 		new App.Views.PageNumber({el: $('.stepscontainer')});
-		new App.Views.HelpButton({el: $('#help-container')});
-
-		App.vent.on('facebook:initialized', function(){
-			new App.Views.InviteFriends({el: $('#page3')});
-		});
+		new App.Views.HelpButton({el: $('#help-container')});		
 	});	
 }());
