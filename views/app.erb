@@ -256,8 +256,8 @@
 
 <script type="text/template" id="venue-listitem-template">
    <div class="result_title">{{= venue.get('name') }}</div>
-   <div class="result_image"><img src="{{= venue.get('photo_url') }}" alt="{{= venue.get('name') }}"></div>
-   <div class="result_rating"><img src="{{= venue.get('rating_img_url_small') }}" alt="{{= venue.get('avg_rating') }}"></div>
+   <div class="result_image"><img src="{{= venue.get('photo_url').replace(/https?\:/, '') }}" alt="{{= venue.get('name') }}"></div>
+   <div class="result_rating"><img src="{{= venue.get('rating_img_url_small').replace(/https?\:/, '') }}" alt="{{= venue.get('avg_rating') }}"></div>
    <div class="result_rating_count">({{= venue.get('review_count') }})</div>
    <div class="description_container">
       <div class="result_address">{{= venue.get('address') }}</div>
