@@ -30,6 +30,7 @@ class App < Sinatra::Base
 
   # used by Canvas apps - redirect the POST to be a regular GET
   post "/" do
+    @app_id = app_id
     signed_request = params['signed_request']    
     token = ''
     begin
