@@ -1,10 +1,9 @@
 window.Facebook = (function () {
 
-	/*var permsNeeded = ['create_event', 'publish_stream'];
+	var permsNeeded = ['create_event', 'publish_stream'];
     	
 	function handleBadLoginState(permissions){
-		window.location.href = 'http://www.google.com';
-		//TODO: fill this in
+		ga('send', 'event', 'error', 'handleBadLoginState', 'handleBadLoginState', App.elapsedTime());
 	}
 
     // Function that checks needed user permissions
@@ -36,7 +35,7 @@ window.Facebook = (function () {
 			    }, 20);
         }
       });
-    };*/
+    };
 
 	var facebookConstructor = function Facebook(appId, channelFile){
 		if(false === (this instanceof Facebook)) {
@@ -52,7 +51,7 @@ window.Facebook = (function () {
 	            xfbml      : true                                     // parse XFBML
 	          }); 	      
 
-	      /*FB.getLoginStatus(function(response) {
+	      FB.getLoginStatus(function(response) {
 	        if (response.status === 'connected') {
 	          checkPermissions();
 	        } else if (response.status === 'not_authorized') {
@@ -60,22 +59,8 @@ window.Facebook = (function () {
 	        } else {
 	          handleBadLoginState(permsNeeded);
 	        }
-	      });*/
-		  var counter = 0,
-	      	    timer = setInterval(function(){
-	      	    	console.log(counter);
-	      	    	console.log(App);
-			      	if (typeof App != 'undefined' && typeof App.vent != 'undefined' ){
-			      		console.log('counter');
-			      		clearInterval(timer);
-			      		App.vent.trigger('facebook:initialized');           
-			      	} else if (counter > 1000){
-			      		clearInterval(timer);
-			      		// TODO: notify ga
-			        } else {
-			      		counter++;
-			      	}
-			    }, 20);	
+	      });
+			
 	      FB.Canvas.setAutoGrow();
 	    };
 
@@ -124,6 +109,8 @@ window.Facebook = (function () {
 			link: link,
 			picture: picture
 		};
+
+		console.log(params);
 
 		postToFacebook('/' + eventId + '/feed', params, onSuccess, onError);
 	}

@@ -12,7 +12,7 @@ class App < Sinatra::Base
   MAP_HEIGHT = 419
   
   map_param_names   = ['title', 'address', 'icon', 'latitude', 'longitude', 'start_time'].freeze
-  flyer_param_names = ['title', 'address', 'flyer', 'username', 'userFirstName', 'start_time'].freeze
+  flyer_param_names = ['title', 'address', 'flyer_num', 'venue', 'username', 'user_first_name', 'start_time'].freeze
 
   set :protection, :except => [:frame_options, :session_hijacking]
   enable :static
@@ -65,6 +65,7 @@ class App < Sinatra::Base
   get '/flyer' do
     @ga_setup_string = ga_setup_string
     if (!has_all_params?(params, flyer_param_names))
+      puts "!!!!!!!!!!!! #{(params.keys - flyer_param_names).inspect}, #{(flyer_param_names - params.keys).inspect}"
       raise Sinatra::NotFound
     else
       flyer_num = params[:flyer_num]

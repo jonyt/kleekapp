@@ -11,7 +11,10 @@
 				return this.formatAMPM(date);
 			},
 			function(date){
-				return this.formatAMPM(date).replace(/([AP]M)/, "<span>$1</span>");
+				return this.formatAMPM(date).replace(/([AP]M)/i, "<span>$1</span>");
+			},
+			function(date){ // Really ugly hack here to conform to CSS rules in flyers.css
+				return this.formatAMPM(date).replace(/([AP]M)/i, "</p><span>$1</span><p>");
 			}
 		],		
         dateFormatCallbacks: [
@@ -20,8 +23,8 @@
         			this.monthNamesShort[date.getMonth()].toLowerCase() + '. ' + date.getDate();
         	},
         	function(date){
-        		return this.dayNames[date.getDay()].toLowerCase() + ' ' + date.getDate() + 
-        			this.monthNames[date.getMonth()];
+        		return this.dayNamesShort[date.getDay()].toLowerCase() + ' ' + date.getDate() + ' ' + 
+        			this.monthNamesShort[date.getMonth()];
         	},
         	function(date){
         		return this.dayNames[date.getDay()].toLowerCase() + ' ' + 
@@ -51,7 +54,7 @@
 				  timeFormatCallback = this.timeFormatCallbacks[1];
 				  break;
 				case 3:
-				  timeFormatCallback = this.timeFormatCallbacks[2];
+				  timeFormatCallback = this.timeFormatCallbacks[3];
 				  break;    
 				default:
 				  throw 'Unknown index: ' + index;
@@ -90,6 +93,7 @@
                             'http://' + window.location.host + "/flyer?" + $.param(flyerParams)
                             ); 
 
+				console.log(flyerUrl);
 				// TODO change shorten to static method
 				new Bitly().shorten(
 					flyerUrl,
