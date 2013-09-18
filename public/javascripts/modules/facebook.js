@@ -43,13 +43,13 @@ window.Facebook = (function () {
 	    }	    		
 
 		window.fbAsyncInit = function() {
-	      FB.init({
+	      /*FB.init({
 	            appId      : appId,                     // App ID
 	            channelUrl : channelFile, // Channel File
 	            status     : true,                                    // check login status
 	            cookie     : true,                                    // enable cookies to allow the server to access the session
 	            xfbml      : true                                     // parse XFBML
-	          }); 	      
+	          });*/ 	      
 
 	      FB.getLoginStatus(function(response) {
 	        if (response.status === 'connected') {
