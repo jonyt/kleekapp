@@ -42,8 +42,6 @@ window.Facebook = (function () {
 	        return new Facebook();
 	    }	    		
 
-	    console.log(appId + ' ' + typeof appId);
-
 		window.fbAsyncInit = function() {
 	      /*FB.init({
 	            appId      : appId,                     // App ID
