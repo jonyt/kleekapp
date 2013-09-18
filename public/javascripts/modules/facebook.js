@@ -42,6 +42,8 @@ window.Facebook = (function () {
 	        return new Facebook();
 	    }	    		
 
+	    console.log(appId + ' ' + typeof appId);
+
 		window.fbAsyncInit = function() {
 	      /*FB.init({
 	            appId      : appId,                     // App ID
@@ -69,7 +71,7 @@ window.Facebook = (function () {
 	      var js, fjs = d.getElementsByTagName(s)[0];
 	      if (d.getElementById(id)) return;
 	      js = d.createElement(s); js.id = id;
-	      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&status=0";
+	      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&status=0&appId=" + appId;
 	      fjs.parentNode.insertBefore(js, fjs);
 	    }(document, 'script', 'facebook-jssdk'));
 	}	
