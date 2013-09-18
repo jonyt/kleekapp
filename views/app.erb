@@ -46,7 +46,6 @@
   <div id="fb-root"></div>
   <script type="text/javascript" src="/javascripts/modules/facebook.js"></script>
   <script type="text/javascript">
-    console.log("ppp <%= @app_id %>");
     window.Facebook = new Facebook("<%= @app_id %>", "<%= url_no_scheme('/channel.html') %>");
   </script>  
 

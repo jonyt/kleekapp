@@ -77,7 +77,6 @@ window.Facebook = (function () {
 	}	
 
 	function postToFacebook(url, params, onSuccess, onError){
-		console.log('Post to ' + url);
 		FB.api(
 	        url,
 	        'post',
@@ -111,8 +110,6 @@ window.Facebook = (function () {
 			link: link,
 			picture: picture
 		};
-
-		console.log(params);
 
 		postToFacebook('/' + eventId + '/feed', params, onSuccess, onError);
 	}

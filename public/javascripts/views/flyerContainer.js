@@ -119,7 +119,7 @@
 				$(e.target).fadeOut();
 				this.flyerContainer.animate({left: 135});
 				this.flyerContainer.wrap(
-					$('<a />', {href: 'https://www.facebook.com/events/' + this.model.get('id')})
+					$('<a />', {href: 'https://www.facebook.com/events/' + this.model.get('id'), target: '_top'})
 				);
 				Facebook.inviteFriendsToApp();				
 			}
