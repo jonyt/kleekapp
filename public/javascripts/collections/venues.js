@@ -1,7 +1,7 @@
 (function () {
 	var venues = Backbone.Collection.extend({
 		model: App.Models.Venue,
-		url: 'http://api.yelp.com/business_review_search',
+		url: 'https://api.yelp.com/business_review_search',
 	    initialize: function(models, options){
 	    },
 	    fetch: function(options){
