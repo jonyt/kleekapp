@@ -33,6 +33,7 @@ class App < Sinatra::Base
   post "/" do
     @ga_setup_string = ga_setup_string
     @app_id = app_id
+    @redirect_url = 'https://apps.facebook.com/kleekapp/'
     signed_request = params['signed_request']    
     token = ''
     begin
