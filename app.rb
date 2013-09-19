@@ -104,6 +104,18 @@ class App < Sinatra::Base
       return true
     end
 
+    def app_installed?(token)
+      begin
+        graph = Koala::Facebook::API.new(token)
+        installed = graph.get_connections('me','installed')
+        return installed.has_key?('installed')
+      rescue Exception => e
+        return false  
+      end
+      
+      return false
+    end
+
     def permissions_ok?(token)
       begin
         graph = Koala::Facebook::API.new(token)
