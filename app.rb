@@ -2,6 +2,7 @@ require 'sinatra/base'
 require 'koala'
 require 'json'
 require 'time'
+require 'cgi'
 
 class App < Sinatra::Base
   include ERB::Util
@@ -33,7 +34,7 @@ class App < Sinatra::Base
   post "/" do
     @ga_setup_string = ga_setup_string
     @app_id = app_id
-    @redirect_url = 'https://apps.facebook.com/kleekapp/'
+    @redirect_url = CGI.escape('https://apps.facebook.com/kleekapp/')
     signed_request = params['signed_request']    
     token = ''
     begin
