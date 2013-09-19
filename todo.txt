@@ -1,0 +1,28 @@
+important
+map kleekapp to heroku
+test auth on initial use
+testing on chrome, ff, ie
+
+todos
+ga reporting
+no error message on location not found in address search
+no error messages to user
+same layout for all views (including 404 and 500)
+replace address search with jquery plugin
+bounce markers on list item mouseover
+improve fb integration (better texts for app, images, url for kleek on posts)
+minify js, css
+load yelp models from page
+tab order on forms
+use minified carousel scripts
+image loader placeholders
+
+css
+rounded corners on every flyer
+put crowd header on all pages
+replace logo 
+
+major
+convert all css to bootstrap
+all images to sprites
+page load time
