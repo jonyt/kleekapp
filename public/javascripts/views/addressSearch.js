@@ -38,7 +38,11 @@
 			    });
 
 			    return false;
+			},
+			'click #addressSearchButton': function(){
+				$(this).trigger('submit');
 			}
+
 		}
 	});
 

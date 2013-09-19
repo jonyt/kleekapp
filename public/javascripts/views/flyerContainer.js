@@ -87,7 +87,7 @@
 				},
 				eventId = this.model.get('id'),
 				flyerUrl = (window.location.host.indexOf('localhost') > -1 ?
-                            "http://stormy-sands-3246.herokuapp.com/flyer?" + $.param(flyerParams):
+                            "http://kleekapp.herokuapp.com/flyer?" + $.param(flyerParams):
                             'http://' + window.location.host + "/flyer?" + $.param(flyerParams)
                             ); 
 

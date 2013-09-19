@@ -125,7 +125,7 @@ class App < Sinatra::Base
 
     def ga_setup_string
       ga_id = ENV["GA_ID"] || 'UA-43442670-1'
-      ga_host = (host.match(/localhost/) ? "{'cookieDomain': 'none'}" : 'kleekapp.com')
+      ga_host = (host.match(/localhost/) ? "{'cookieDomain': 'none'}" : "'kleekapp.com'")
       "ga('create', '#{ga_id}', #{ga_host});"
     end
 

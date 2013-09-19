@@ -31,7 +31,7 @@
                                         start_time: model.get('start_time'),           
                                     }),     
                                     mapUrl = (window.location.host.indexOf('localhost') > -1 ?
-                                        "http://stormy-sands-3246.herokuapp.com/map?" + encodedParams:
+                                        "http://kleekapp.herokuapp.com/map?" + encodedParams:
                                         'http://' + window.location.host + "/map?" + encodedParams
                                         );                                
                                     
