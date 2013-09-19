@@ -18,6 +18,7 @@ class App < Sinatra::Base
   enable :static
 
   get "/" do
+    @ga_setup_string = ga_setup_string
     @app_id = app_id
     if params.has_key?('code')
       token = authenticator.get_access_token(params['code'])
@@ -30,6 +31,7 @@ class App < Sinatra::Base
 
   # used by Canvas apps - redirect the POST to be a regular GET
   post "/" do
+    @ga_setup_string = ga_setup_string
     @app_id = app_id
     signed_request = params['signed_request']    
     token = ''
@@ -51,6 +53,7 @@ class App < Sinatra::Base
   end
 
   get '/map' do
+    @ga_setup_string = ga_setup_string
     if (!has_all_params?(params, map_param_names))
         raise Sinatra::NotFound
     else
@@ -66,7 +69,6 @@ class App < Sinatra::Base
   get '/flyer' do
     @ga_setup_string = ga_setup_string
     if (!has_all_params?(params, flyer_param_names))
-      puts "!!!!!!!!!!!! #{(params.keys - flyer_param_names).inspect}, #{(flyer_param_names - params.keys).inspect}"
       raise Sinatra::NotFound
     else
       flyer_num = params[:flyer_num]

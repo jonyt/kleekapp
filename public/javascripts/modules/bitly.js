@@ -20,13 +20,10 @@ window.Bitly = (function () {
 					format: 'json'
 				},
 				success: function(response){ 
-					console.log(response); 
 					onSuccess(response.data.url); 
 				},
 				error: function(error){ 
-					//TODO: remove all console.log
-					console.log(error); 
-					console.log('error')
+					ga('send', 'event', 'bitly', 'shorten', 'error', error);
 				}
 			}); 
 		}

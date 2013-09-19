@@ -8,6 +8,7 @@
                 model.set('userFirstName', response.first_name);
                 model.set('username', response.name);
             }, function(){
+                ga('send', 'event', 'event-model', 'get-fb-username', 'error');
                 //TODO: report and throw error
             });
         },
@@ -59,18 +60,20 @@
                                 this.get('privacy_type'),
                                 this.get('start_time'),
                                 onSuccess,
-                                function(error){console.log(error)}
+                                function(error){
+                                    ga('send', 'event', 'fb-module', 'create-event', 'error', error);
+                                }
                         );
 		},
         inviteFriends: function(friendIds, options){
             var onSuccess = function(){
-                    //TODO: report to ga
+                    ga('send', 'event', 'fb-invite-friends', 'success', '', friendIds);
                     if (typeof options.success == 'function'){
                         options.success.call(this);
                     }
                 },
                 onError = function(){
-                    //TODO: report to ga
+                    ga('send', 'event', 'fb-invite-friends', 'error');
                     if (typeof options.error == 'function'){
                         options.error.call(this);
                     }

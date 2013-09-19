@@ -23,7 +23,7 @@
 		},				
         events: {			
 			'click': function(e){
-				ga('send', 'event', 'interaction', 'help', '', App.elapsedTime());					
+				ga('send', 'event', 'help', '', '', this.$helpContent.text());					
 
 				this.$helpContent.dialog('open');
 			}

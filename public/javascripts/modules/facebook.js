@@ -28,7 +28,7 @@ window.Facebook = (function () {
 			      		App.vent.trigger('facebook:initialized');           
 			      	} else if (counter > 1000){
 			      		clearInterval(timer);
-			      		// TODO: notify ga
+			      		ga('send', 'event', 'fb-module', 'init', 'error', 'too many attempts');
 			        } else {
 			      		counter++;
 			      	}
@@ -134,10 +134,10 @@ window.Facebook = (function () {
 			filters: ['app_non_users']
 		}, function(response){
 			if (response == null){
-				// report to GA, dialog cancelled
+				ga('send', 'event', 'fb-invite_dialog', 'cancel');
 			} else {
 				// report to GA, response.to.join() is a comma separated string of invitee IDs
-				console.log(response.to.join());
+				ga('send', 'event', 'fb-invite_dialog', 'send', '', response.to.join(', '));
 			}			
 		});
 	}

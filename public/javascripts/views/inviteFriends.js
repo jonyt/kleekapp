@@ -8,12 +8,13 @@
 					this.model = eventModel;
 				});
 			} catch(e) {
+				ga('send', 'event', 'invite-friends', 'init', 'error', e);
 				//TODO: no access token, throw error and report to ga
 			}						
 		},
 		events: {
 			'click #invite_friends_button': function(){
-				ga('send', 'event', 'interaction', 'invite-friends', '', App.elapsedTime());					
+				ga('send', 'event', 'invite-friends', 'click', '', App.elapsedTime());					
 
 				var friendIds = this.friendSelector.getSelectedIds();
 				if (friendIds === undefined || friendIds.length === 0){
@@ -27,7 +28,7 @@
 				}
 			},
 			'click #skip_invite_friends_button': function(){
-				ga('send', 'event', 'interaction', 'skip-invite-friends', '', App.elapsedTime());					
+				ga('send', 'event', 'invite-friends', 'skip', '', App.elapsedTime());					
 
 				App.vent.trigger('page:transition', 4);
 			}

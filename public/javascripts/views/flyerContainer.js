@@ -75,9 +75,7 @@
 
 				this.$('.chooseflyer').css({visibility: 'visible'});
 			},
-			'click .chooseflyer': function(e){
-				ga('send', 'event', 'interaction', 'flyer-select', '', App.elapsedTime());									
-
+			'click .chooseflyer': function(e){												
 				var flyerParams = {
 					flyer_num: this.currentFlyerIndex + 1,
 					title: this.model.get('eventName'),
@@ -92,6 +90,8 @@
                             "http://stormy-sands-3246.herokuapp.com/flyer?" + $.param(flyerParams):
                             'http://' + window.location.host + "/flyer?" + $.param(flyerParams)
                             ); 
+
+				ga('send', 'event', 'interaction', 'flyer-select', '', flyerParams.flyer_num);
 
 				// TODO change shorten to static method
 				new Bitly().shorten(
