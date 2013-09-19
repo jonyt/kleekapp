@@ -9,10 +9,15 @@
 					icon: App.MarkerIcons[options.category]
 			    });
 
-			var divOverlay = new DivOverlay(this.model.get('name'), options.map, this.marker.getPosition());
+			var divOverlay = new DivOverlay(this.model.get('name'), options.map, this.marker.getPosition()),
+				marker = this.marker;
 			divOverlay.hide();
 
 			this.listenTo(this.model, 'listVenueItem:mouseover', function(){
+				// marker.setAnimation(google.maps.Animation.BOUNCE);
+				// setTimeout(function(){
+				// 	marker.setAnimation(null);
+				// }, 800);
 				divOverlay.show();
 			});
 			this.listenTo(this.model, 'listVenueItem:mouseout', function(){

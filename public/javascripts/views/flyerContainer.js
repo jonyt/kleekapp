@@ -93,7 +93,6 @@
                             'http://' + window.location.host + "/flyer?" + $.param(flyerParams)
                             ); 
 
-				console.log(flyerUrl);
 				// TODO change shorten to static method
 				new Bitly().shorten(
 					flyerUrl,
