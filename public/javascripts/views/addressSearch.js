@@ -40,9 +40,10 @@
 			    return false;
 			},
 			'click #addressSearchButton': function(){
-				$(this).trigger('submit');
+				// Yet another ugly hack because the HTML is not properly formed and I don't have time
+				// to correct it
+				this.$el.trigger('submit');
 			}
-
 		}
 	});
 
