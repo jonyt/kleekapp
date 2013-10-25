@@ -6,7 +6,8 @@ require 'cgi'
 
 class App < Sinatra::Base
   include ERB::Util
-
+  use Rack::Deflater
+  
   FB_SCOPE = 'create_event,publish_stream'
   
   MAP_WIDTH  = 597
@@ -23,7 +24,6 @@ class App < Sinatra::Base
     @ga_setup_string = ga_setup_string
     @app_id = app_id
     @redirect_url = CGI.escape('https://kleekapp.herokuapp.com/signin_success')
-    puts "!!!!!!!!!!! #{@redirect_url}"
     if params.has_key?('code')
       token = authenticator.get_access_token(params['code'])
       return (permissions_ok?(token) ? (erb :app) : (erb :index))
