@@ -21,6 +21,7 @@ class App < Sinatra::Base
   get "/" do
     @ga_setup_string = ga_setup_string
     @app_id = app_id
+    @redirect_url = CGI.escape('https://kleekapp.herokuapp.com/signin_success')
     if params.has_key?('code')
       token = authenticator.get_access_token(params['code'])
       return (permissions_ok?(token) ? (erb :app) : (erb :index))
