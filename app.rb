@@ -34,7 +34,7 @@ class App < Sinatra::Base
   post "/" do
     @ga_setup_string = ga_setup_string
     @app_id = app_id
-    @redirect_url = CGI.escape('https://apps.facebook.com/kleekapp/')
+    @redirect_url = CGI.escape(url('/signin_success'))
     signed_request = params['signed_request']    
     token = ''
     begin
@@ -52,6 +52,10 @@ class App < Sinatra::Base
     end
     
     return (permissions_ok?(token) ? (erb :app) : (erb :index))
+  end
+
+  get '/signin_success' do
+    redirect "#{scheme}://apps.facebook.com/kleekapp/"
   end
 
   get '/map' do
