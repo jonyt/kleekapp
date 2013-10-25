@@ -34,7 +34,7 @@ class App < Sinatra::Base
   post "/" do
     @ga_setup_string = ga_setup_string
     @app_id = app_id
-    @redirect_url = CGI.escape(url('/signin_success'))
+    @redirect_url = CGI.escape('https://kleekapp.herokuapp.com/signin_success')
     signed_request = params['signed_request']    
     token = ''
     begin
