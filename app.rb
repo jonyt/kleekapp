@@ -28,7 +28,6 @@ class App < Sinatra::Base
       token = authenticator.get_access_token(params['code'])
       return (permissions_ok?(token) ? (erb :app) : (erb :index))
     else
-      @redirect_url = url('/')
       erb :index
     end        
   end
