@@ -5,4 +5,4 @@ Kleekapp was a Facebook application that enabled a user to create an event for f
 
 I retired the application due to the upcoming changes to Facebook's API, which would no longer enable event creation by API. 
 
-To take a look at some screenshots head over to the project's [page](https://developers.facebook.com/apps).
+To take a look at some screenshots head over to the project's [page](http://jonyt.github.io/kleekapp/).
